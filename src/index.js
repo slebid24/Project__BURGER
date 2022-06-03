@@ -1,4 +1,6 @@
 import "./styles/index.scss";
+import "../src/module/main";
+import asss from "../src/module/main";
 
 const userStack = {
    language: 'JavaScript',
@@ -13,3 +15,5 @@ const user = {
 
 console.log(user);
 console.log("hello!!");
+
+asss();

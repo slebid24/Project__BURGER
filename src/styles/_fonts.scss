@@ -1,4 +1,14 @@
 @font-face {
-   font-family: generalFont;
-   src: url("../fonts/Roboto-Bold.ttf");
+   font-family: "OpenSans-Bold";
+   src: url("/src/fonts/OpenSans-Bold.ttf");
+}
+
+@font-face {
+   font-family: "OpenSans-Regular";
+   src: url("/src/fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+   font-family: "OpenSans-SemiBold";
+   src: url("/src/fonts/OpenSans-SemiBold.ttf");
 }
