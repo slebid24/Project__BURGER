@@ -79,7 +79,42 @@
    }
  /////////////////////////////////////////
 
- 
+   &__tomato-1{
+      position: absolute;
+      z-index: 17;
+      left: 46%;
+      top: 28%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+   }
+
+   &__tomato-2{
+      position: absolute;
+      z-index: 17;
+      left: 70%;
+      top: 31%;
+      transform: translate(-50%, -50%) rotate(20deg);
+   }
+
+   &__tomato-3{
+      position: absolute;
+      z-index: 17;
+      left: 59%;
+      top: 40%;
+      transform: translate(-50%, -50%) rotate(10deg);
+   }
+
+   &__tomato-4--small{
+      position: absolute;
+      z-index: 17;
+      left: 59%;
+      top: 70%;
+      transform: translate(-50%, -50%) rotate(23deg);
+   }
+
+   &__tomato-img-width{
+      width: 170px;
+   }
+
 
 
 
