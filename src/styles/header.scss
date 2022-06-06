@@ -1,0 +1,74 @@
+.header {
+   position: relative;
+   z-index: 3;
+   
+   &__inner {
+      display: flex;
+      justify-content: space-between;
+   }
+
+   &__leftside {
+      display: flex;
+      align-items: center;
+   }
+
+   &__changer-inner {
+      display: flex;
+      justify-content: space-between;
+      margin-left: 80px;
+      width: 240px;
+   }
+
+   &__page-changer {
+      font-family: OpenSans-Regular;
+      font-size: 16px;
+      line-height: 20px;
+      color: #1F2939;
+   }
+
+   &__page-changer--active {
+      font-family: OpenSans-SemiBold;
+      color: #1F2939;
+   }
+
+   &__rightside {
+      display: flex;
+      align-items: center;
+   }
+
+   &__contact-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-right: 60px;
+   }
+
+   &__cta-btn {
+      @include reset-button;
+      width: 142px;
+      height: 32px;
+      background: #FFEDED;
+      border-radius: 99px;
+      margin-right: 60px;
+   }
+
+   &__cta-btn-text {
+      font-family: OpenSans-SemiBold;
+      font-size: 16px;
+      line-height: 20px;
+      color: #FF4D4F;
+      &::before {
+         content: url(../images/phone.svg);
+         margin-right: 6px;
+      }
+   }
+
+   &__phone {
+      @include reset-link;
+      font-family: OpenSans-SemiBold;
+      font-size: 16px;
+      line-height: 20px;
+      color: #1F2939;
+   }
+}
+

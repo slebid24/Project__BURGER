@@ -1,0 +1,53 @@
+.footer {
+   position: relative;
+   z-index: 2;
+   &__inner {
+      display: flex;
+      justify-content: space-between;
+   }
+
+   &__leftside{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
+
+   &__company-info{
+      font-family: OpenSans-Regular;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      color: #949BA6;
+   }
+
+   &__links{
+      margin-left: 8px;
+      font-family: OpenSans-Regular;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      color: #5243C2;
+   }
+
+   &__links-policy{
+      @include reset-link;
+   }
+
+   &__links-terms{
+      @include reset-link;
+      &:before {
+         content: url(../images/_.svg);
+         margin-right: 7px;
+         margin-left: 7px;
+         margin-bottom: px;
+      }
+   }
+
+   &__rightside{
+      display: flex;
+   }
+
+   &__payments{
+      margin-left: 8px;
+   }
+}

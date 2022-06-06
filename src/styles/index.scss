@@ -1,6 +1,9 @@
 @import "fonts.scss";
 @import "mixins.scss";
-
+@import "header.scss";
+@import "main.scss";
+@import "footer.scss";
+@import "burger.scss";
 
 *,
 *::before,
@@ -12,23 +15,21 @@ img {
    max-width: 100%;
 }
 
-.wrapper {
-   max-width: 1940px;
-   min-width: 280px;
-   min-height: 100%;
-   margin: 0 auto;
-   overflow-x: hidden;
-}
-
 .container {
       max-width: 1544px;
-      margin: 0 auto;
+      margin: auto;
+      padding: 15px;
+      height: 100%;
+}
+
+.wrapper{
+   height: 97vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
 }
 
 
-li {
-   @include reset-list
- }
  
 
 

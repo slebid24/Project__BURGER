@@ -1,0 +1,96 @@
+.burger{
+   height: 100%;
+   width: 100%;
+   position: relative;
+
+   &__bun-top-img-width{
+     width: 460px;
+   }
+
+   &__bun-top{
+      width: 500px;
+      
+      position: absolute;
+      z-index: 20;
+      left: 65%;
+      top: 0%;
+      transform: translate(-50%, -50%) rotate(25deg);;
+   }
+   /////////////////////////////////////////
+   &__salad-top{
+      position: absolute;
+      z-index: 19;
+      left: 53%;
+      top: 4%;
+      transform: translate(-50%, -50%) rotate(23deg);;
+   }
+
+   &__salad-top-img-width{
+      width: 410px;
+   }
+   /////////////////////////////////////////
+   &__mayo-top{
+      position: absolute;
+      z-index: 19;
+      left: 60%;
+      top: 16%;
+      transform: translate(-50%, -50%) rotate(23deg) scale(-1, 1) ;
+   }
+
+   &__mayo-top-img-width{
+      width: 360px;
+   }
+   /////////////////////////////////////////
+
+   &__cucumber-1{
+      position: absolute;
+      z-index: 18;
+      left: 59%;
+      top: 16%;
+      transform: translate(-50%, -50%) rotate(23deg);
+   }
+
+   &__cucumber-2{
+      position: absolute;
+      z-index: 18;
+      left: 49%;
+      top: 16%;
+      transform: translate(-50%, -50%) rotate(30deg);
+   }
+
+   &__cucumber-3{
+      position: absolute;
+      z-index: 18;
+      left: 62%;
+      top: 26%;
+      transform: translate(-50%, -50%) rotate(-6deg);
+   }
+
+   &__cucumber-4{
+      position: absolute;
+      z-index: 18;
+      left: 76%;
+      top: 29%;
+      transform: translate(-50%, -50%) rotate(44deg);
+   }
+
+   &__cucumber-img-width{
+      width: 170px;
+   }
+ /////////////////////////////////////////
+
+ 
+
+
+
+
+   &__bun-bot{
+      position: absolute;
+      left: 65%;
+      top: 70%;
+      transform: translate(-50%, -50%);
+   }
+
+}
+
+
