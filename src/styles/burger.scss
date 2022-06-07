@@ -3,26 +3,29 @@
    width: 100%;
    position: relative;
 
-   &__bun-top-img-width{
-     width: 460px;
-   }
 
    &__bun-top{
-      width: 500px;
+      width: 470px;
       
       position: absolute;
       z-index: 20;
       left: 65%;
       top: 0%;
-      transform: translate(-50%, -50%) rotate(25deg);;
+      transform: translate(-50%, -50%) rotate(25deg);
    }
+
+   &__bun-top-img-width{
+      width: 470px;
+   }
+
    /////////////////////////////////////////
    &__salad-top{
       position: absolute;
       z-index: 19;
       left: 53%;
       top: 4%;
-      transform: translate(-50%, -50%) rotate(23deg);;
+      transform: translate(-50%, -50%) rotate(23deg);
+      width: 410px;
    }
 
    &__salad-top-img-width{
@@ -35,6 +38,7 @@
       left: 60%;
       top: 16%;
       transform: translate(-50%, -50%) rotate(23deg) scale(-1, 1) ;
+      width: 360px;
    }
 
    &__mayo-top-img-width{
@@ -48,6 +52,7 @@
       left: 59%;
       top: 16%;
       transform: translate(-50%, -50%) rotate(23deg);
+      width: 170px;
    }
 
    &__cucumber-2{
@@ -56,6 +61,7 @@
       left: 49%;
       top: 16%;
       transform: translate(-50%, -50%) rotate(30deg);
+      width: 170px;
    }
 
    &__cucumber-3{
@@ -64,6 +70,7 @@
       left: 62%;
       top: 26%;
       transform: translate(-50%, -50%) rotate(-6deg);
+      width: 170px;
    }
 
    &__cucumber-4{
@@ -72,6 +79,7 @@
       left: 76%;
       top: 29%;
       transform: translate(-50%, -50%) rotate(44deg);
+      width: 170px;
    }
 
    &__cucumber-img-width{
@@ -85,6 +93,7 @@
       left: 46%;
       top: 28%;
       transform: translate(-50%, -50%) rotate(-12deg);
+      width: 180px;
    }
 
    &__tomato-2{
@@ -93,6 +102,7 @@
       left: 70%;
       top: 31%;
       transform: translate(-50%, -50%) rotate(20deg);
+      width: 180px;
    }
 
    &__tomato-3{
@@ -101,29 +111,166 @@
       left: 59%;
       top: 40%;
       transform: translate(-50%, -50%) rotate(10deg);
+      width: 180px;
    }
 
    &__tomato-4--small{
       position: absolute;
       z-index: 17;
-      left: 59%;
-      top: 70%;
-      transform: translate(-50%, -50%) rotate(23deg);
+      left: 30%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(50deg);
+      width: 100px;
    }
 
    &__tomato-img-width{
-      width: 170px;
+      width: 180px;
+   }
+
+   &__tomato-img-width--small{
+      width: 100px;
+   }
+////////////////////////////////////////////////////
+   &__cutlet{
+      position: absolute;
+      z-index: 15;
+      left: 62%;
+      top: 46%;
+      transform: translate(-50%, -50%) rotate(-10deg);
+      width: 525px;
+      
+   }
+
+   &__cutlet-img-width{
+      width: 525px;
+   }
+////////////////////////////////////////////////////
+   &__onion-1--L{
+      position: absolute;
+      z-index: 20;
+      left: 62%;
+      top: 62%;
+      transform: translate(-50%, -50%) rotate(20deg);
+      width: 220px;
+   }
+
+   &__onion-2--L{
+      position: absolute;
+      z-index: 19;
+      left: 64%;
+      top: 66%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      width: 220px;
+   }
+
+   &__onion-img-width--L{
+      width: 220px;
+   }
+
+   &__onion-3--M{
+      position: absolute;
+      z-index: 19;
+      left: 48%;
+      top: 71%;
+      transform: translate(-50%, -50%) rotate(22deg);
+      width: 160px;
+   }
+
+   &__onion-img-width--M{
+      width: 160px;
    }
 
 
 
-
-
-   &__bun-bot{
+   &__onion-4--S{
       position: absolute;
-      left: 65%;
-      top: 70%;
-      transform: translate(-50%, -50%);
+      z-index: 19;
+      left: 85%;
+      top: 30%;
+      transform: translate(-50%, -50%) rotate(25deg);
+      width: 115px;
+   }
+
+   &__onion-5--S{
+      position: absolute;
+      z-index: 19;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      width: 115px;
+   }
+
+   &__onion-img-width--S{
+      width: 115px;
+   }
+
+   &__onion-6--XS{
+      position: absolute;
+      z-index: 20;
+      left: 73%;
+      top: 47%;
+      transform: translate(-50%, -50%) rotate(25deg);
+      width: 84px;
+   }
+
+   &__onion-img-width--XS{
+      width: 84px;
+   }
+/////////////////////////////////////////////////////////
+   
+   &__cheese{
+      position: absolute;
+      z-index: 15;
+      left: 62%;
+      top: 82%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      width: 480px;
+   }
+
+   &__cheese-img-width{
+      width: 490px;
+   }
+/////////////////////////////////////////////////////////
+   &__salad-bot{
+      position: absolute;
+      z-index: 14;
+      left: 62%;
+      top: 84%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      width: 550px;
+   }
+
+   &__salad-bot-img-width{
+      width: 550px;
+   }
+/////////////////////////////////////////////////////////
+   &__mayo-bot{
+      position: absolute;
+      z-index: 13;
+      left: 61%;
+      top: 94%;
+      transform: translate(-50%, -50%) rotate(-5deg);
+      width: 390px;
+   }
+
+   &__mayo-bot-img-width{
+      width: 390px;
+   }
+/////////////////////////////////////////////////////////
+
+
+  &__bun-bot{
+      width: 500px;
+      position: absolute;
+      z-index: 12;
+      left: 62%;
+      top: 97%;
+      transform: translate(-50%, -50%) rotate(-8deg);
+      width: 420px;
+   }
+
+   &__bun-bot-img-width{
+     width: 420px;
    }
 
 }
