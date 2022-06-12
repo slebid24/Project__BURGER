@@ -100,37 +100,62 @@ window.addEventListener("DOMContentLoaded", () => {
    });
    //2 page
    ////////////////////////////////////////////////////
-   
-   let generalObj = {
-      src: [],
-      alt: [],
-      title: [],
-      pieces: [],
-      price: [],
-      time: [],
-      kcal: []
-   };
 
-   function buildBurger() {
-      class Ingradiet {
-         constructor(src, alt, title, btnMinus, btnPlus, pieces, price, time, kcal) {
-            this.src = src;
-            this.alt = alt;
-            this.title = title;
-            this.btnMinus = btnMinus;
-            this.btnMinus = btnPlus;
-            this.pieces = pieces;
-            this.price = price;
-            this.time = time;
-            this.kcal = kcal;
-         }
-      }
-      
+   // let generalObj = {
+   //    src: [],
+   //    alt: [],
+   //    title: [],
+   //    pieces: [],
+   //    price: [],
+   //    time: [],
+   //    kcal: []
+   // };
 
 
+   // class Ingradiet {
+   //    constructor(src, alt, title, pieces, price, time, kcal, parentSelector) {
+   //       this.src = src;
+   //       this.alt = alt;
+   //       this.title = title;
+   //       // this.btnMinus = document.querySelector(btnMinus);
+   //       // this.btnPlus = document.querySelector(btnPlus);
+   //       this.pieces = pieces;
+   //       this.price = price;
+   //       this.time = time;
+   //       this.kcal = kcal;
+   //       this.parent = document.querySelector(parentSelector);
+   //    }
 
 
-   }
+   //    render() {
+   //       const element = document.createElement("div");
+   //       element.innerHTML = `
+   //       <div class="main__ingradient">
+   //             <div class="main__ingradient-inner">
+   //                <img class="main__ingradient-img" src=${this.src} alt=${this.alt} ">
+   //                <div class="main__ingradient-name">${this.title}</div>
+   //                <div class="main__counter">
+   //                <button class="main__counter-minus"></button>
+   //                <div class="main__count">${this.pieces}</div>
+   //                <button class="main__counter-plus"></button>
+   //             </div>
+   //          </div>
+   //       </div>
+   //       `;
+   //       this.parent.append(element);
+   //    }
+   // }
+
+   // new Ingradiet(
+   //    "/src/images/Type=cutlet.svg",
+   //    "cutlet",
+   //    "Cutlet",
+   //    0,
+   //    2,
+   //    3,
+   //    600,
+   //    ".main__botside"
+   // ).render();
 
 
 
