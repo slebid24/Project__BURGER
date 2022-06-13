@@ -1,6 +1,7 @@
 .main {
    flex-grow: 1;
    z-index: 1;
+
    &__wrapper{
       width: 100%;
       height: 100%;   
@@ -274,9 +275,8 @@
       display: flex;
       justify-content: space-between;
       position: absolute;
-      top: 70%;
+      top: 71%;
       left: 4%;
-      
    }
 
    &__ingradient{

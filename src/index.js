@@ -1,7 +1,10 @@
 import "./styles/index.scss";
 import "../src/module/main";
+import cutlet from './images/Type=cutlet.svg';
+
 
 window.addEventListener("DOMContentLoaded", () => {
+   
    document.body.style.overflow = "hidden";
 
 
@@ -98,64 +101,75 @@ window.addEventListener("DOMContentLoaded", () => {
 
          };
    });
-   //2 page
-   ////////////////////////////////////////////////////
-
-   // let generalObj = {
-   //    src: [],
-   //    alt: [],
-   //    title: [],
-   //    pieces: [],
-   //    price: [],
-   //    time: [],
-   //    kcal: []
-   // };
+   // 2 page
+   //////////////////////////////////////////////////
+   let generalObj = {
+      constructor: {
+         cutletItem: []
+      }
+   };
+  
 
 
-   // class Ingradiet {
-   //    constructor(src, alt, title, pieces, price, time, kcal, parentSelector) {
-   //       this.src = src;
-   //       this.alt = alt;
-   //       this.title = title;
-   //       // this.btnMinus = document.querySelector(btnMinus);
-   //       // this.btnPlus = document.querySelector(btnPlus);
-   //       this.pieces = pieces;
-   //       this.price = price;
-   //       this.time = time;
-   //       this.kcal = kcal;
-   //       this.parent = document.querySelector(parentSelector);
-   //    }
+   class Ingradiet {
+      constructor(src, alt, title, pieces, price, time, kcal, parentSelector, obj, btnMinus, btnPlus, ) {
+         this.src = src;
+         this.alt = alt;
+         this.title = title;
+         this.pieces = pieces;
+         this.price = price;
+         this.time = time;
+         this.kcal = kcal;
+         this.parent = document.querySelector(parentSelector);
+         this.obj = obj;
+         this.btnMinus = document.querySelector(btnMinus);
+         this.btnPlus = document.querySelector(btnPlus);
+         
+      }
 
 
-   //    render() {
-   //       const element = document.createElement("div");
-   //       element.innerHTML = `
-   //       <div class="main__ingradient">
-   //             <div class="main__ingradient-inner">
-   //                <img class="main__ingradient-img" src=${this.src} alt=${this.alt} ">
-   //                <div class="main__ingradient-name">${this.title}</div>
-   //                <div class="main__counter">
-   //                <button class="main__counter-minus"></button>
-   //                <div class="main__count">${this.pieces}</div>
-   //                <button class="main__counter-plus"></button>
-   //             </div>
-   //          </div>
-   //       </div>
-   //       `;
-   //       this.parent.append(element);
-   //    }
-   // }
+      render() {
+         const element = document.createElement("div");
+         element.innerHTML = `
+         <div class="main__ingradient">
+               <div class="main__ingradient-inner">
+                  <img class="main__ingradient-img" src=${this.src} alt=${this.alt} ">
+                  <div class="main__ingradient-name">${this.title}</div>
+                  <div class="main__counter">
+                  <button class="main__counter-minus"></button>
+                  <div class="main__count">${this.pieces}</div>
+                  <button class="main__counter-plus"></button>
+               </div>
+            </div>
+         </div>
+         `;
+         this.parent.append(element);
+         element.classList.add("main__botside");
+      }
 
-   // new Ingradiet(
-   //    "/src/images/Type=cutlet.svg",
-   //    "cutlet",
-   //    "Cutlet",
-   //    0,
-   //    2,
-   //    3,
-   //    600,
-   //    ".main__botside"
-   // ).render();
+
+      counter(){
+         
+         this.pieces  =  2;
+         
+      }
+   }
+
+   
+
+   new Ingradiet(
+      cutlet,
+      "cutlet",
+      "Cutlet",
+      0,
+      2,
+      3,
+      600,
+      ".main__inner-pg2",
+      generalObj,
+      ".main__counter-minus",
+      ".main__counter-plus",
+   ).render().counter();
 
 
 
