@@ -1,6 +1,7 @@
 import "./styles/index.scss";
 import "../src/module/main";
 import cutlet from './images/Type=cutlet.svg';
+import mayo from "./images/Type=mayo.svg";
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -104,93 +105,149 @@ window.addEventListener("DOMContentLoaded", () => {
    // 2 page
    //////////////////////////////////////////////////
    let generalObj = {
-      constructor: {
-         cutletItem: []
-      }
+      burger: {
+         cutletKey:[],
+         mayoKey: [],
+         onionKey: [],
+         tomatoKey: [],
+         cucumberKey: [],
+         cheeseKey: [],
+         saladKey: [],
+         bunKey: []
+      },
+
+      sum: [0]
    };
+
+   const n = generalObj.sum;
+   
+   const sumprice = n.reduce((sum, current) => sum + current);
+   
   
 
 
    class Ingradiet {
-      constructor(src, alt, title, pieces, price, time, kcal, parentSelector, obj, btnMinus, btnPlus, ) {
+      constructor(src, alt, title, price, time, kcal, parentSelector, obj, imgKey, count, btnMinus, btnPlus ) {
          this.src = src;
          this.alt = alt;
          this.title = title;
-         this.pieces = pieces;
          this.price = price;
          this.time = time;
          this.kcal = kcal;
          this.parent = document.querySelector(parentSelector);
          this.obj = obj;
+         this.imgKey = imgKey;
+         this.count = document.querySelector(count);
          this.btnMinus = document.querySelector(btnMinus);
          this.btnPlus = document.querySelector(btnPlus);
          
-      }
+         }
 
-
-      render() {
-         const element = document.createElement("div");
-         element.innerHTML = `
-         <div class="main__ingradient">
-               <div class="main__ingradient-inner">
-                  <img class="main__ingradient-img" src=${this.src} alt=${this.alt} ">
-                  <div class="main__ingradient-name">${this.title}</div>
-                  <div class="main__counter">
-                  <button class="main__counter-minus"></button>
-                  <div class="main__count">${this.pieces}</div>
-                  <button class="main__counter-plus"></button>
+         render() {
+            const element = document.createElement("div");
+            element.innerHTML = `
+            
+                  <div class="main__ingradient-inner">
+                     <img class="main__ingradient-img" src=${this.src} alt=${this.alt} ">
+                     <div class="main__ingradient-name">${this.title}</div>
+                     <div class="main__counter">
+                     <button class="main__counter-minus"></button>
+                     <div class="main__count"></div>
+                     <button class="main__counter-plus"></button>
+                  </div>
                </div>
-            </div>
-         </div>
-         `;
-         this.parent.append(element);
-         element.classList.add("main__botside");
+            
+            `;
+             this.parent.append(element);
+            element.classList.add("main__ingradient");
+
+            let n = 0;
+            
+            document.querySelector(".main__total").innerHTML = `$${n.toFixed(2)}`;
+
+            this.btnPlus.addEventListener("click", () => {
+               if (n < 10) {
+                  this.count.innerHTML = ++n;
+                  this.imgKey.push(this.src);
+                  
+                  
+
+                  this.obj.sum.push(this.price);
+                  let num = this.obj.sum;
+                  let sumprice = num.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
+
+                  
+               } else {
+                  return;
+               }
+            });
+
+            this.btnMinus.addEventListener("click", () => {
+               if (n > 0) {
+                  this.count.innerHTML = --n;
+                  let deleted = this.imgKey.pop(this.title);
+                  
+
+                  let deletedSum = this.obj.sum.pop(this.price);
+                  let num = this.obj.sum;
+                  let sumprice = num.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
+               } else {
+                  return;
+               }
+            });
+         }
+
+         
+         
+         
       }
 
 
-      counter(){
-         
-         this.pieces  =  2;
-         
-      }
-   }
 
+
+
+      let mayoIn = new Ingradiet(
+         mayo,
+         "mayo",
+         "Mayo",
+         0.5,
+         0.5,
+         300,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.mayoKey,
+         '.main__count',
+         ".main__counter-minus",
+         ".main__counter-plus",
+
+
+      );
    
+      mayoIn.render();
+      // mayoIn.counter();
+       
 
-   new Ingradiet(
-      cutlet,
-      "cutlet",
-      "Cutlet",
-      0,
-      2,
-      3,
-      600,
-      ".main__inner-pg2",
-      generalObj,
-      ".main__counter-minus",
-      ".main__counter-plus",
-   ).render().counter();
+      let cutletIn = new Ingradiet(
+         cutlet,
+         "cutlet",
+         "Cutlet",
+         2,
+         3,
+         600,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.cutletKey,
+         '.main__count',
+         ".main__counter-minus",
+         ".main__counter-plus",
 
+      );
+   
+      cutletIn.render();
+      // cutletIn.counter();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      
+     
 });
