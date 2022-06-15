@@ -3,6 +3,11 @@ import "../src/module/main";
 import cutlet from './images/Type=cutlet.svg';
 import mayo from "./images/Type=mayo.svg";
 import onion from "./images/Type=onion.png";
+import tomato from "./images/Type=tomato.png";
+import cucumber from "./images/Type=cucumber.png";
+import cheese from "./images/Type=cheese.svg";
+import salad from "./images/Type=salad.svg";
+import bun from "./images/Type=bun_middle.png";
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -124,12 +129,13 @@ window.addEventListener("DOMContentLoaded", () => {
    };
 
    class Ingradiet {
-      constructor(src, alt, title, price, time, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId) {
+      constructor(src, alt, title, price, time, oz, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId) {
          this.src = src;
          this.alt = alt;
          this.title = title;
          this.price = price;
          this.time = time;
+         this.oz = oz;
          this.kcal = kcal;
          this.parent = document.querySelector(parentSelector);
          this.obj = obj;
@@ -139,10 +145,7 @@ window.addEventListener("DOMContentLoaded", () => {
          this.countId = countId;
          this.render();
          this.counter();
-         this.defoult();
-         
-         
-         
+         this.default();
          
          
          }
@@ -166,10 +169,10 @@ window.addEventListener("DOMContentLoaded", () => {
             
          }
 
-         defoult() {
+         default() {
             document.querySelector(`#${this.countId}`).innerHTML = 0;
             document.querySelector(".main__total").innerHTML = "$0.00";
-            document.querySelector(".main__time").innerHTML = "0 min";
+            document.querySelector(".main__time").innerHTML = "0.0 min";
             document.querySelector(".main__capacity").innerHTML = "0 oz";
             document.querySelector(".main__kcal").innerHTML = "0 kcal";
    
@@ -192,8 +195,17 @@ window.addEventListener("DOMContentLoaded", () => {
                   this.obj.time.push(this.time);
                   let numTime = this.obj.time;
                   let sumTime = numTime.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__time").innerHTML = `${sumTime} min`;
+                  document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
 
+                  this.obj.oz.push(this.oz);
+                  let numOz = this.obj.oz;
+                  let sumOz = numOz.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
+
+                  this.obj.kcal.push(this.kcal);
+                  let numKcal = this.obj.kcal;
+                  let sumKcal = numKcal.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
 
 
 
@@ -216,7 +228,19 @@ window.addEventListener("DOMContentLoaded", () => {
                   let deletedTime = this.obj.time.pop(this.time);
                   let numTime = this.obj.time;
                   let sumTime = numTime.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__time").innerHTML = `${sumTime} min`;
+                  document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
+
+                  let deletedOz = this.obj.oz.pop(this.oz);
+                  let numOz = this.obj.oz;
+                  let sumOz = numOz.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
+
+                  let deletedKcal = this.obj.kcal.pop(this.kcal);
+                  let numKcal = this.obj.kcal;
+                  let sumKcal = numKcal.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
+
+
                   
                } else {
                   return;
@@ -235,6 +259,7 @@ window.addEventListener("DOMContentLoaded", () => {
          "Cutlet",
          2,
          3,
+         7,
          600,
          ".main__botside",
          generalObj,
@@ -242,7 +267,6 @@ window.addEventListener("DOMContentLoaded", () => {
          "cutletMinus",
          "cutletPlus",
          "cutletCount",
-
       );
       
       
@@ -253,8 +277,9 @@ window.addEventListener("DOMContentLoaded", () => {
          "mayo",
          "Mayo",
          2,
-         3,
-         300,
+         0.5,
+         2,
+         150,
          ".main__botside",
          generalObj,
          generalObj.burger.mayoKey,
@@ -271,13 +296,94 @@ window.addEventListener("DOMContentLoaded", () => {
          "Onion",
          0.5,
          0.5,
-         300,
+         1,
+         40,
          ".main__botside",
          generalObj,
          generalObj.burger.onionKey,
          "onionMinus",
          "onionPlus",
          "onionCount"
+      );
+
+      let tomatoIn = new Ingradiet(
+         tomato,
+         "tomato",
+         "Tomato",
+         1,
+         0.5,
+         1,
+         60,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.tomatoKey,
+         "tomatoMinus",
+         "tomatoPlus",
+         "tomatoCount"
+      );
+
+      let cucumberIn = new Ingradiet(
+         cucumber,
+         "cucumber",
+         "Cucumber",
+         0.3,
+         0.5,
+         1,
+         40,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.cucumberKey,
+         "cucumberMinus",
+         "cucumberPlus",
+         "cucumberCount"
+      );
+
+      let cheeseIn = new Ingradiet(
+         cheese,
+         "cheese",
+         "Cheese",
+         2,
+         0.5,
+         2,
+         150,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.cheeseKey,
+         "cheeseMinus",
+         "cheesePlus",
+         "cheeseCount"
+      );
+
+      let saladIn = new Ingradiet(
+         salad,
+         "salad",
+         "Salad",
+         0.5,
+         0.2,
+         1,
+         40,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.saladKey,
+         "saladMinus",
+         "saladPlus",
+         "saladCount"
+      );
+
+      let bunIn = new Ingradiet(
+         bun,
+         "bun",
+         "Bun",
+         0.3,
+         0.2,
+         1,
+         90,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.bunKey,
+         "bunMinus",
+         "bunPlus",
+         "bunCount"
       );
    
       
