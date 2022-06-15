@@ -2,6 +2,7 @@ import "./styles/index.scss";
 import "../src/module/main";
 import cutlet from './images/Type=cutlet.svg';
 import mayo from "./images/Type=mayo.svg";
+import onion from "./images/Type=onion.png";
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -116,18 +117,14 @@ window.addEventListener("DOMContentLoaded", () => {
          bunKey: []
       },
 
-      sum: [0]
+      sum: [0],
+      time: [0],
+      oz: [0],
+      kcal: [0],
    };
 
-   const n = generalObj.sum;
-   
-   const sumprice = n.reduce((sum, current) => sum + current);
-   
-  
-
-
    class Ingradiet {
-      constructor(src, alt, title, price, time, kcal, parentSelector, obj, imgKey, count, btnMinus, btnPlus ) {
+      constructor(src, alt, title, price, time, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId) {
          this.src = src;
          this.alt = alt;
          this.title = title;
@@ -137,55 +134,77 @@ window.addEventListener("DOMContentLoaded", () => {
          this.parent = document.querySelector(parentSelector);
          this.obj = obj;
          this.imgKey = imgKey;
-         this.count = document.querySelector(count);
-         this.btnMinus = document.querySelector(btnMinus);
-         this.btnPlus = document.querySelector(btnPlus);
+         this.btnIdM = btnIdM;
+         this.btnIdP = btnIdP;
+         this.countId = countId;
+         this.render();
+         this.counter();
+         this.defoult();
+         
+         
+         
+         
          
          }
 
          render() {
             const element = document.createElement("div");
             element.innerHTML = `
-            
                   <div class="main__ingradient-inner">
                      <img class="main__ingradient-img" src=${this.src} alt=${this.alt} ">
                      <div class="main__ingradient-name">${this.title}</div>
                      <div class="main__counter">
-                     <button class="main__counter-minus"></button>
-                     <div class="main__count"></div>
-                     <button class="main__counter-plus"></button>
+                     <button id="${this.btnIdM}" class="main__counter-minus"></button>
+                     <div id="${this.countId}" class="main__count"></div>
+                     <button id="${this.btnIdP}" class="main__counter-plus"></button>
                   </div>
                </div>
             
             `;
              this.parent.append(element);
             element.classList.add("main__ingradient");
-
-            let n = 0;
             
-            document.querySelector(".main__total").innerHTML = `$${n.toFixed(2)}`;
+         }
 
-            this.btnPlus.addEventListener("click", () => {
+         defoult() {
+            document.querySelector(`#${this.countId}`).innerHTML = 0;
+            document.querySelector(".main__total").innerHTML = "$0.00";
+            document.querySelector(".main__time").innerHTML = "0 min";
+            document.querySelector(".main__capacity").innerHTML = "0 oz";
+            document.querySelector(".main__kcal").innerHTML = "0 kcal";
+   
+         }
+         
+         counter() {
+            let n = 0;
+           
+            document.querySelector(`#${this.btnIdP}`).addEventListener("click", () => {
                if (n < 10) {
-                  this.count.innerHTML = ++n;
-                  this.imgKey.push(this.src);
                   
+                  document.querySelector(`#${this.countId}`).innerHTML = ++n;
+                  this.imgKey.push(this.src); 
                   
-
                   this.obj.sum.push(this.price);
                   let num = this.obj.sum;
                   let sumprice = num.reduce((sum, current) => sum + current);
                   document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
 
-                  
+                  this.obj.time.push(this.time);
+                  let numTime = this.obj.time;
+                  let sumTime = numTime.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__time").innerHTML = `${sumTime} min`;
+
+
+
+
                } else {
                   return;
                }
             });
 
-            this.btnMinus.addEventListener("click", () => {
+            document.querySelector(`#${this.btnIdM}`).addEventListener("click", () => {
                if (n > 0) {
-                  this.count.innerHTML = --n;
+                  document.querySelector(`#${this.countId}`).innerHTML = --n;
                   let deleted = this.imgKey.pop(this.title);
                   
 
@@ -193,6 +212,12 @@ window.addEventListener("DOMContentLoaded", () => {
                   let num = this.obj.sum;
                   let sumprice = num.reduce((sum, current) => sum + current);
                   document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
+
+                  let deletedTime = this.obj.time.pop(this.time);
+                  let numTime = this.obj.time;
+                  let sumTime = numTime.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__time").innerHTML = `${sumTime} min`;
+                  
                } else {
                   return;
                }
@@ -200,34 +225,9 @@ window.addEventListener("DOMContentLoaded", () => {
          }
 
          
-         
-         
       }
 
-
-
-
-
-      let mayoIn = new Ingradiet(
-         mayo,
-         "mayo",
-         "Mayo",
-         0.5,
-         0.5,
-         300,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.mayoKey,
-         '.main__count',
-         ".main__counter-minus",
-         ".main__counter-plus",
-
-
-      );
-   
-      mayoIn.render();
-      // mayoIn.counter();
-       
+      
 
       let cutletIn = new Ingradiet(
          cutlet,
@@ -239,15 +239,49 @@ window.addEventListener("DOMContentLoaded", () => {
          ".main__botside",
          generalObj,
          generalObj.burger.cutletKey,
-         '.main__count',
-         ".main__counter-minus",
-         ".main__counter-plus",
+         "cutletMinus",
+         "cutletPlus",
+         "cutletCount",
 
       );
-   
-      cutletIn.render();
-      // cutletIn.counter();
+      
+      
+      
+
+      let mayoIn = new Ingradiet(
+         mayo,
+         "mayo",
+         "Mayo",
+         2,
+         3,
+         300,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.mayoKey,
+         "mayoMinus",
+         "mayoPlus",
+         "mayoCount",
+      );
 
       
+
+      let onionIn = new Ingradiet(
+         onion,
+         "onion",
+         "Onion",
+         0.5,
+         0.5,
+         300,
+         ".main__botside",
+         generalObj,
+         generalObj.burger.onionKey,
+         "onionMinus",
+         "onionPlus",
+         "onionCount"
+      );
+   
+      
+
      
+      
 });
