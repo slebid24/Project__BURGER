@@ -7,11 +7,11 @@ import tomato from "./images/Type=tomato.png";
 import cucumber from "./images/Type=cucumber.png";
 import cheese from "./images/Type=cheese.svg";
 import salad from "./images/Type=salad.svg";
-import bun from "./images/Type=bun_middle.png";
+import bun from "./images/Type=bun_middle.svg";
 
 
 window.addEventListener("DOMContentLoaded", () => {
-   
+
    document.body.style.overflow = "hidden";
 
 
@@ -112,7 +112,7 @@ window.addEventListener("DOMContentLoaded", () => {
    //////////////////////////////////////////////////
    let generalObj = {
       burger: {
-         cutletKey:[],
+         cutletKey: [],
          mayoKey: [],
          onionKey: [],
          tomatoKey: [],
@@ -129,8 +129,9 @@ window.addEventListener("DOMContentLoaded", () => {
    };
 
    class Ingradiet {
-      constructor(src, alt, title, price, time, oz, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId) {
+      constructor(src, conImg, alt, title, price, time, oz, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId) {
          this.src = src;
+         this.conImg = conImg;
          this.alt = alt;
          this.title = title;
          this.price = price;
@@ -146,13 +147,13 @@ window.addEventListener("DOMContentLoaded", () => {
          this.render();
          this.counter();
          this.default();
-         
-         
-         }
 
-         render() {
-            const element = document.createElement("div");
-            element.innerHTML = `
+
+      }
+
+      render() {
+         const element = document.createElement("div");
+         element.innerHTML = `
                   <div class="main__ingradient-inner">
                      <img class="main__ingradient-img" src=${this.src} alt=${this.alt} ">
                      <div class="main__ingradient-name">${this.title}</div>
@@ -164,230 +165,241 @@ window.addEventListener("DOMContentLoaded", () => {
                </div>
             
             `;
-             this.parent.append(element);
-            element.classList.add("main__ingradient");
-            
-         }
+         this.parent.append(element);
+         element.classList.add("main__ingradient");
 
-         default() {
-            document.querySelector(`#${this.countId}`).innerHTML = 0;
-            document.querySelector(".main__total").innerHTML = "$0.00";
-            document.querySelector(".main__time").innerHTML = "0.0 min";
-            document.querySelector(".main__capacity").innerHTML = "0 oz";
-            document.querySelector(".main__kcal").innerHTML = "0 kcal";
-   
-         }
-         
-         counter() {
-            let n = 0;
-           
-            document.querySelector(`#${this.btnIdP}`).addEventListener("click", () => {
-               if (n < 10) {
-                  
-                  document.querySelector(`#${this.countId}`).innerHTML = ++n;
-                  this.imgKey.push(this.src); 
-                  
-                  this.obj.sum.push(this.price);
-                  let num = this.obj.sum;
-                  let sumprice = num.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
-
-                  this.obj.time.push(this.time);
-                  let numTime = this.obj.time;
-                  let sumTime = numTime.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
-
-                  this.obj.oz.push(this.oz);
-                  let numOz = this.obj.oz;
-                  let sumOz = numOz.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
-
-                  this.obj.kcal.push(this.kcal);
-                  let numKcal = this.obj.kcal;
-                  let sumKcal = numKcal.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
-
-
-
-               } else {
-                  return;
-               }
-            });
-
-            document.querySelector(`#${this.btnIdM}`).addEventListener("click", () => {
-               if (n > 0) {
-                  document.querySelector(`#${this.countId}`).innerHTML = --n;
-                  let deleted = this.imgKey.pop(this.title);
-                  
-
-                  let deletedSum = this.obj.sum.pop(this.price);
-                  let num = this.obj.sum;
-                  let sumprice = num.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
-
-                  let deletedTime = this.obj.time.pop(this.time);
-                  let numTime = this.obj.time;
-                  let sumTime = numTime.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
-
-                  let deletedOz = this.obj.oz.pop(this.oz);
-                  let numOz = this.obj.oz;
-                  let sumOz = numOz.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
-
-                  let deletedKcal = this.obj.kcal.pop(this.kcal);
-                  let numKcal = this.obj.kcal;
-                  let sumKcal = numKcal.reduce((sum, current) => sum + current);
-                  document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
-
-
-                  
-               } else {
-                  return;
-               }
-            });
-         }
-
-         
       }
 
-      
+      default () {
+         document.querySelector(`#${this.countId}`).innerHTML = 0;
+         document.querySelector(".main__total").innerHTML = "$0.00";
+         document.querySelector(".main__time").innerHTML = "0.0 min";
+         document.querySelector(".main__capacity").innerHTML = "0 oz";
+         document.querySelector(".main__kcal").innerHTML = "0 kcal";
 
-      let cutletIn = new Ingradiet(
-         cutlet,
-         "cutlet",
-         "Cutlet",
-         2,
-         3,
-         7,
-         600,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.cutletKey,
-         "cutletMinus",
-         "cutletPlus",
-         "cutletCount",
-      );
-      
-      
-      
+      }
 
-      let mayoIn = new Ingradiet(
-         mayo,
-         "mayo",
-         "Mayo",
-         2,
-         0.5,
-         2,
-         150,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.mayoKey,
-         "mayoMinus",
-         "mayoPlus",
-         "mayoCount",
-      );
+      counter() {
+         let n = 0;
 
-      
+         document.querySelector(`#${this.btnIdP}`).addEventListener("click", () => {
+            if (n < 10) {
 
-      let onionIn = new Ingradiet(
-         onion,
-         "onion",
-         "Onion",
-         0.5,
-         0.5,
-         1,
-         40,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.onionKey,
-         "onionMinus",
-         "onionPlus",
-         "onionCount"
-      );
+               document.querySelector(`#${this.countId}`).innerHTML = ++n;
+               this.imgKey.push(this.conImg);
 
-      let tomatoIn = new Ingradiet(
-         tomato,
-         "tomato",
-         "Tomato",
-         1,
-         0.5,
-         1,
-         60,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.tomatoKey,
-         "tomatoMinus",
-         "tomatoPlus",
-         "tomatoCount"
-      );
+               this.obj.sum.push(this.price);
+               let num = this.obj.sum;
+               let sumprice = num.reduce((sum, current) => sum + current);
+               document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
 
-      let cucumberIn = new Ingradiet(
-         cucumber,
-         "cucumber",
-         "Cucumber",
-         0.3,
-         0.5,
-         1,
-         40,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.cucumberKey,
-         "cucumberMinus",
-         "cucumberPlus",
-         "cucumberCount"
-      );
+               this.obj.time.push(this.time);
+               let numTime = this.obj.time;
+               let sumTime = numTime.reduce((sum, current) => sum + current);
+               document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
 
-      let cheeseIn = new Ingradiet(
-         cheese,
-         "cheese",
-         "Cheese",
-         2,
-         0.5,
-         2,
-         150,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.cheeseKey,
-         "cheeseMinus",
-         "cheesePlus",
-         "cheeseCount"
-      );
+               this.obj.oz.push(this.oz);
+               let numOz = this.obj.oz;
+               let sumOz = numOz.reduce((sum, current) => sum + current);
+               document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
 
-      let saladIn = new Ingradiet(
-         salad,
-         "salad",
-         "Salad",
-         0.5,
-         0.2,
-         1,
-         40,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.saladKey,
-         "saladMinus",
-         "saladPlus",
-         "saladCount"
-      );
+               this.obj.kcal.push(this.kcal);
+               let numKcal = this.obj.kcal;
+               let sumKcal = numKcal.reduce((sum, current) => sum + current);
+               document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
 
-      let bunIn = new Ingradiet(
-         bun,
-         "bun",
-         "Bun",
-         0.3,
-         0.2,
-         1,
-         90,
-         ".main__botside",
-         generalObj,
-         generalObj.burger.bunKey,
-         "bunMinus",
-         "bunPlus",
-         "bunCount"
-      );
-   
-      
+               
+            } else {
+               return;
+            }
 
-     
-      
+            console.log(generalObj);
+         });
+
+         
+
+         document.querySelector(`#${this.btnIdM}`).addEventListener("click", () => {
+            if (n > 0) {
+               document.querySelector(`#${this.countId}`).innerHTML = --n;
+               let deleted = this.imgKey.pop(this.title);
+
+
+               let deletedSum = this.obj.sum.pop(this.price);
+               let num = this.obj.sum;
+               let sumprice = num.reduce((sum, current) => sum + current);
+               document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
+
+               let deletedTime = this.obj.time.pop(this.time);
+               let numTime = this.obj.time;
+               let sumTime = numTime.reduce((sum, current) => sum + current);
+               document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
+
+               let deletedOz = this.obj.oz.pop(this.oz);
+               let numOz = this.obj.oz;
+               let sumOz = numOz.reduce((sum, current) => sum + current);
+               document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
+
+               let deletedKcal = this.obj.kcal.pop(this.kcal);
+               let numKcal = this.obj.kcal;
+               let sumKcal = numKcal.reduce((sum, current) => sum + current);
+               document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
+
+
+
+            } else {
+               return;
+            }
+         });
+      }
+
+
+   }
+
+
+
+   let cutletIn = new Ingradiet(
+      cutlet,
+      ".item__cutlet",
+      "cutlet",
+      "Cutlet",
+      2,
+      3,
+      7,
+      600,
+      ".main__botside",
+      generalObj,
+      generalObj.burger.cutletKey,
+      "cutletMinus",
+      "cutletPlus",
+      "cutletCount",
+   );
+
+
+
+
+   let mayoIn = new Ingradiet(
+      mayo,
+      ".item__mayo",
+      "mayo",
+      "Mayo",
+      2,
+      0.5,
+      2,
+      150,
+      ".main__botside",
+      generalObj,
+      generalObj.burger.mayoKey,
+      "mayoMinus",
+      "mayoPlus",
+      "mayoCount",
+   );
+
+
+
+   let onionIn = new Ingradiet(
+      onion,
+      ".item__onion",
+      "onion",
+      "Onion",
+      0.5,
+      0.5,
+      1,
+      40,
+      ".main__botside",
+      generalObj,
+      generalObj.burger.onionKey,
+      "onionMinus",
+      "onionPlus",
+      "onionCount"
+   );
+
+   let tomatoIn = new Ingradiet(
+      tomato,
+      ".item__tomato",
+      "tomato",
+      "Tomato",
+      1,
+      0.5,
+      1,
+      60,
+      ".main__botside",
+      generalObj,
+      generalObj.burger.tomatoKey,
+      "tomatoMinus",
+      "tomatoPlus",
+      "tomatoCount"
+   );
+
+   let cucumberIn = new Ingradiet(
+      cucumber,
+      ".item__cucumber",
+      "cucumber",
+      "Cucumber",
+      0.3,
+      0.5,
+      1,
+      40,
+      ".main__botside",
+      generalObj,
+      generalObj.burger.cucumberKey,
+      "cucumberMinus",
+      "cucumberPlus",
+      "cucumberCount"
+   );
+
+   let cheeseIn = new Ingradiet(
+      cheese,
+      ".item__cheese",
+      "cheese",
+      "Cheese",
+      2,
+      0.5,
+      2,
+      150,
+      ".main__botside",
+      generalObj,
+      generalObj.burger.cheeseKey,
+      "cheeseMinus",
+      "cheesePlus",
+      "cheeseCount"
+   );
+
+   let saladIn = new Ingradiet(
+      salad,
+      ".item__salad",
+      "salad",
+      "Salad",
+      0.5,
+      0.2,
+      1,
+      40,
+      ".main__botside",
+      generalObj,
+      generalObj.burger.saladKey,
+      "saladMinus",
+      "saladPlus",
+      "saladCount"
+   );
+
+   let bunIn = new Ingradiet(
+      bun,
+      ".item__midbun",
+      "bun",
+      "Bun",
+      0.3,
+      0.2,
+      1,
+      90,
+      ".main__botside",
+      generalObj,
+      generalObj.burger.bunKey,
+      "bunMinus",
+      "bunPlus",
+      "bunCount"
+   );
+
+
+
+
+
 });

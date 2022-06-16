@@ -1,0 +1,98 @@
+.item__cutlet{
+      width: 100%;
+      height: 130px;
+      background-image: url(/src/images/Type=cutlet.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: -70%;
+}
+
+.item__mayo{
+      width: 100%;
+      height: 100px;
+      background-image: url(/src/images/Type=mayo.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: -80%;
+}
+
+.item__onion{
+      width: 100%;
+      height: 100px;
+      background-image: url(/src/images/Component3_onion.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: -90%;
+}
+
+.item__tomato{
+      width: 100%;
+      height: 100px;
+      background-image: url(/src/images/Component2_tomato.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: -140%;
+}
+
+.item__cucumber{
+      width: 100%;
+      height: 100px;
+      background-image: url(/src/images/Component3_cucmbers.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: -200%;
+}
+
+.item__cheese{
+      width: 100%;
+      height: 100px;
+      background-image: url(/src/images/Type=cheese.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: 0%;
+}
+
+.item__salad{
+      width: 100%;
+      height: 100px;
+      background-image: url(/src/images/Type=salad.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: -20%;
+}
+
+.item__midbun{
+      width: 100%;
+      height: 100px;
+      background-image: url(/src/images/Type=bun_middle.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: -20%;
+}
+
+.item__topbun{
+      width: 100%;
+      height: 190px;
+      background-image: url(/src/images/Type=bun_top.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      display: block;
+      position: absolute;
+      top: -120%;
+}

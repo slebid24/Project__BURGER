@@ -117,7 +117,7 @@
    &__title-2{
       
       padding-top: 50px;
-      max-width: 245px;
+      max-width: 360px;
       font-family: OpenSans-Bold;
       font-size: 72px;
       line-height: 80px;
@@ -130,17 +130,20 @@
 
    &__const{
       width: 500px;
-      margin-right: 110px;
+      
+      display: flex;
+      flex-direction: column;
+      flex-flow: column-reverse;
    }
 
    &__const-inner{
       position: relative;
-      
-      top: -30%;
-   }
-
-   &__burcon{
-      width: 500px;
+      width: 100%;
+      height: 135px;
+      background-image: url(/src/images/default__land.svg);
+      background-position: center;
+      display: block;
+      margin: 0 auto;
    }
 
    &__info{
@@ -275,8 +278,9 @@
       display: flex;
       justify-content: space-between;
       position: absolute;
-      top: 71%;
+      top: 70%;
       left: 4%;
+      
    }
 
    &__ingradient{
@@ -291,7 +295,7 @@
       height: 180px;
       display: flex;
       flex-direction: column;
-     justify-content: space-between;
+      justify-content: space-between;
    }
 
    &__ingradient-img{
@@ -299,9 +303,7 @@
       height: 50px;
    }
 
-   &__ingradient--cheese{
-      transform: rotate(17deg)
-   }
+   
 
    
 
