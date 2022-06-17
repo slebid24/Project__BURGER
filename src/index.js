@@ -1,13 +1,13 @@
-import "./styles/index.scss";
 import "../src/module/main";
+import bun from "./images/Type=bun_middle.svg";
+import cheese from "./images/Type=cheese.svg";
+import cucumber from "./images/Type=cucumber.png";
 import cutlet from './images/Type=cutlet.svg';
 import mayo from "./images/Type=mayo.svg";
 import onion from "./images/Type=onion.png";
-import tomato from "./images/Type=tomato.png";
-import cucumber from "./images/Type=cucumber.png";
-import cheese from "./images/Type=cheese.svg";
 import salad from "./images/Type=salad.svg";
-import bun from "./images/Type=bun_middle.svg";
+import tomato from "./images/Type=tomato.png";
+import "./styles/index.scss";
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -126,10 +126,11 @@ window.addEventListener("DOMContentLoaded", () => {
       time: [0],
       oz: [0],
       kcal: [0],
+      margin:[0]
    };
 
    class Ingradiet {
-      constructor(src, conImg, alt, title, price, time, oz, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId) {
+      constructor(src, conImg, alt, title, price, time, oz, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId, startMargin) {
          this.src = src;
          this.conImg = conImg;
          this.alt = alt;
@@ -144,6 +145,7 @@ window.addEventListener("DOMContentLoaded", () => {
          this.btnIdM = btnIdM;
          this.btnIdP = btnIdP;
          this.countId = countId;
+         this.startMargin = startMargin;
          this.render();
          this.counter();
          this.default();
@@ -184,9 +186,22 @@ window.addEventListener("DOMContentLoaded", () => {
 
          document.querySelector(`#${this.btnIdP}`).addEventListener("click", () => {
             if (n < 10) {
-
                document.querySelector(`#${this.countId}`).innerHTML = ++n;
+                                                                                 
                this.imgKey.push(this.conImg);
+               let newItem = document.createElement("div");
+
+               newItem.classList.add(this.imgKey[this.imgKey.length -1]);
+               newItem.classList.add("for_comparison");
+               
+               this.obj.margin.push(this.startMargin);
+               let marginFin = this.obj.margin.reduce((sum, current) => sum + current);
+               newItem.style = `top: ${marginFin}%`;
+               
+
+               let parentSelectorBur = document.querySelector(".main__const-inner");   
+               parentSelectorBur.append(newItem);
+
 
                this.obj.sum.push(this.price);
                let num = this.obj.sum;
@@ -209,11 +224,12 @@ window.addEventListener("DOMContentLoaded", () => {
                document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
 
                
+               
             } else {
                return;
             }
 
-            console.log(generalObj);
+            
          });
 
          
@@ -221,7 +237,21 @@ window.addEventListener("DOMContentLoaded", () => {
          document.querySelector(`#${this.btnIdM}`).addEventListener("click", () => {
             if (n > 0) {
                document.querySelector(`#${this.countId}`).innerHTML = --n;
-               let deleted = this.imgKey.pop(this.title);
+               
+               let deleted = this.imgKey.pop(this.conImg);
+               let a = "." + this.conImg;
+               let arr = document.querySelectorAll(a);
+               let comparDefin = arr[arr.length - 1].style.top;
+               arr[arr.length - 1].remove();
+               
+
+               let deletedM = this.obj.margin.pop(this.startMargin);
+               
+               
+               
+               
+
+
 
 
                let deletedSum = this.obj.sum.pop(this.price);
@@ -259,7 +289,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
    let cutletIn = new Ingradiet(
       cutlet,
-      ".item__cutlet",
+      "item__cutlet",
       "cutlet",
       "Cutlet",
       2,
@@ -272,6 +302,7 @@ window.addEventListener("DOMContentLoaded", () => {
       "cutletMinus",
       "cutletPlus",
       "cutletCount",
+      -50
    );
 
 
@@ -279,7 +310,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
    let mayoIn = new Ingradiet(
       mayo,
-      ".item__mayo",
+      "item__mayo",
       "mayo",
       "Mayo",
       2,
@@ -292,13 +323,14 @@ window.addEventListener("DOMContentLoaded", () => {
       "mayoMinus",
       "mayoPlus",
       "mayoCount",
+      -10
    );
 
 
 
    let onionIn = new Ingradiet(
       onion,
-      ".item__onion",
+      "item__onion",
       "onion",
       "Onion",
       0.5,
@@ -310,12 +342,13 @@ window.addEventListener("DOMContentLoaded", () => {
       generalObj.burger.onionKey,
       "onionMinus",
       "onionPlus",
-      "onionCount"
+      "onionCount",
+      -10
    );
 
    let tomatoIn = new Ingradiet(
       tomato,
-      ".item__tomato",
+      "item__tomato",
       "tomato",
       "Tomato",
       1,
@@ -327,12 +360,13 @@ window.addEventListener("DOMContentLoaded", () => {
       generalObj.burger.tomatoKey,
       "tomatoMinus",
       "tomatoPlus",
-      "tomatoCount"
+      "tomatoCount",
+      -10
    );
 
    let cucumberIn = new Ingradiet(
       cucumber,
-      ".item__cucumber",
+      "item__cucumber",
       "cucumber",
       "Cucumber",
       0.3,
@@ -344,12 +378,13 @@ window.addEventListener("DOMContentLoaded", () => {
       generalObj.burger.cucumberKey,
       "cucumberMinus",
       "cucumberPlus",
-      "cucumberCount"
+      "cucumberCount",
+      -10
    );
 
    let cheeseIn = new Ingradiet(
       cheese,
-      ".item__cheese",
+      "item__cheese",
       "cheese",
       "Cheese",
       2,
@@ -361,12 +396,13 @@ window.addEventListener("DOMContentLoaded", () => {
       generalObj.burger.cheeseKey,
       "cheeseMinus",
       "cheesePlus",
-      "cheeseCount"
+      "cheeseCount",
+      0
    );
 
    let saladIn = new Ingradiet(
       salad,
-      ".item__salad",
+      "item__salad",
       "salad",
       "Salad",
       0.5,
@@ -378,12 +414,13 @@ window.addEventListener("DOMContentLoaded", () => {
       generalObj.burger.saladKey,
       "saladMinus",
       "saladPlus",
-      "saladCount"
+      "saladCount",
+      -20
    );
 
    let bunIn = new Ingradiet(
       bun,
-      ".item__midbun",
+      "item__midbun",
       "bun",
       "Bun",
       0.3,
@@ -395,7 +432,8 @@ window.addEventListener("DOMContentLoaded", () => {
       generalObj.burger.bunKey,
       "bunMinus",
       "bunPlus",
-      "bunCount"
+      "bunCount",
+      -20
    );
 
 
