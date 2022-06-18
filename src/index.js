@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
    const width = window.getComputedStyle(wrapper).width;
    const widthAfterSwipe = window.getComputedStyle(page1).width;
-   console.log(widthAfterSwipe);
+   
 
 
    let offset = 0;
@@ -223,7 +223,7 @@ window.addEventListener("DOMContentLoaded", () => {
                let marginFin = concatArr.reduce((sum, current) => sum + current);
                // привласнення сумми всіх відступів останньому створеному елементу
                newItem.style = `top: ${marginFin}%`;
-               
+
                parentSelectorBur.append(newItem);
                let topBun = document.createElement("div");
                if (lenghthOfArr > 0 && (document.querySelectorAll(".item__topbun").length < 1)) {
