@@ -6,7 +6,36 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: -70%;
+      transition: all 0.1s ease-in-out;
+      
+      
+}
+
+@keyframes ani {
+0% {opacity: 0;}
+100% {opacity: 1; }
+}
+
+@keyframes aniBackLeft {
+0% {opacity: 1; left: 0%}
+100% {opacity: 0; left: -30%}
+}
+
+@keyframes aniBackRight {
+      0% {opacity: 1; left: 0%}
+      100% {opacity: 0; left: +30%}
+      }
+
+.for_start_ani{
+      animation: ani 0.2s forwards;
+}
+
+.for_del_ani_left{
+      animation: aniBackLeft 0.2s forwards;
+}
+
+.for_del_ani_right{
+      animation: aniBackRight 0.2s forwards;
 }
 
 .item__mayo{
@@ -17,7 +46,8 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: -80%;
+      transition: all 0.1s ease-in-out;
+      
 }
 
 .item__onion{
@@ -28,7 +58,8 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: -90%;
+      transition: all 0.1s ease-in-out;
+      
 }
 
 .item__tomato{
@@ -39,7 +70,8 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: -140%;
+      transition: all 0.1s ease-in-out;
+      
 }
 
 .item__cucumber{
@@ -50,7 +82,8 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: -200%;
+      transition: all 0.1s ease-in-out;
+      
 }
 
 .item__cheese{
@@ -61,7 +94,8 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: 0%;
+      transition: all 0.1s ease-in-out;
+      
 }
 
 .item__salad{
@@ -72,7 +106,8 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: -20%;
+      transition: all 0.1s ease-in-out;
+      
 }
 
 .item__midbun{
@@ -83,7 +118,8 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: -20%;
+      transition: all 0.1s ease-in-out;
+      
 }
 
 .item__topbun{
@@ -94,5 +130,6 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      // top: -120%;
+      
+      
 }

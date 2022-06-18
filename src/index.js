@@ -121,16 +121,25 @@ window.addEventListener("DOMContentLoaded", () => {
          saladKey: [],
          bunKey: []
       },
-
+      num: [],
       sum: [0],
       time: [0],
       oz: [0],
       kcal: [0],
-      margin:[0]
+      margin: {
+         cutletMar: [],
+         mayoMar: [],
+         onionMar: [],
+         tomatoMar: [],
+         cucumberMar: [],
+         cheeseMar: [],
+         saladMar: [],
+         bunMar: []
+      }
    };
 
    class Ingradiet {
-      constructor(src, conImg, alt, title, price, time, oz, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId, startMargin) {
+      constructor(src, conImg, alt, title, price, time, oz, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId, startMargin, pathMargin) {
          this.src = src;
          this.conImg = conImg;
          this.alt = alt;
@@ -146,6 +155,7 @@ window.addEventListener("DOMContentLoaded", () => {
          this.btnIdP = btnIdP;
          this.countId = countId;
          this.startMargin = startMargin;
+         this.pathMargin = pathMargin;
          this.render();
          this.counter();
          this.default();
@@ -186,22 +196,45 @@ window.addEventListener("DOMContentLoaded", () => {
 
          document.querySelector(`#${this.btnIdP}`).addEventListener("click", () => {
             if (n < 10) {
+               // лічильник
                document.querySelector(`#${this.countId}`).innerHTML = ++n;
-                                                                                 
-               this.imgKey.push(this.conImg);
-               let newItem = document.createElement("div");
+               let parentSelectorBur = document.querySelector(".main__const-inner");   
 
+
+               // додавання класу в масив
+               this.imgKey.push(this.conImg);
+               this.obj.num.push(this.title);
+               let lenghthOfArr = this.obj.num.length;
+               
+               
+               
+               // створення елемента і привласнення йому класу з масива
+               let newItem = document.createElement("div");
                newItem.classList.add(this.imgKey[this.imgKey.length -1]);
                newItem.classList.add("for_comparison");
-               
-               this.obj.margin.push(this.startMargin);
-               let marginFin = this.obj.margin.reduce((sum, current) => sum + current);
+               newItem.classList.add("for_start_ani");
+
+               // Пуш значення відступу в масив
+               this.pathMargin.push(this.startMargin);
+               // сума всіх відступів
+               let concatArr = generalObj.margin.cutletMar
+               .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar, generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar, generalObj.margin.bunMar);
+               concatArr.unshift(0);
+               let marginFin = concatArr.reduce((sum, current) => sum + current);
+               // привласнення сумми всіх відступів останньому створеному елементу
                newItem.style = `top: ${marginFin}%`;
                
-
-               let parentSelectorBur = document.querySelector(".main__const-inner");   
                parentSelectorBur.append(newItem);
+               let topBun = document.createElement("div");
+               if (lenghthOfArr > 0 && (document.querySelectorAll(".item__topbun").length < 1)) {
+                  
+                  topBun.classList.add("item__topbun");
+                  
+                  parentSelectorBur.append(topBun);
+               }
+               topBun.style = `top: ${parseInt(marginFin) - 100}%`;
 
+               console.log(parseInt(document.querySelectorAll(".item__topbun").length ))
 
                this.obj.sum.push(this.price);
                let num = this.obj.sum;
@@ -235,50 +268,70 @@ window.addEventListener("DOMContentLoaded", () => {
          
 
          document.querySelector(`#${this.btnIdM}`).addEventListener("click", () => {
-            if (n > 0) {
-               document.querySelector(`#${this.countId}`).innerHTML = --n;
-               
-               let deleted = this.imgKey.pop(this.conImg);
-               let a = "." + this.conImg;
-               let arr = document.querySelectorAll(a);
-               let comparDefin = arr[arr.length - 1].style.top;
-               arr[arr.length - 1].remove();
-               
-
-               let deletedM = this.obj.margin.pop(this.startMargin);
-               
-               
-               
-               
-
-
-
-
-               let deletedSum = this.obj.sum.pop(this.price);
-               let num = this.obj.sum;
-               let sumprice = num.reduce((sum, current) => sum + current);
-               document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
-
-               let deletedTime = this.obj.time.pop(this.time);
-               let numTime = this.obj.time;
-               let sumTime = numTime.reduce((sum, current) => sum + current);
-               document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
-
-               let deletedOz = this.obj.oz.pop(this.oz);
-               let numOz = this.obj.oz;
-               let sumOz = numOz.reduce((sum, current) => sum + current);
-               document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
-
-               let deletedKcal = this.obj.kcal.pop(this.kcal);
-               let numKcal = this.obj.kcal;
-               let sumKcal = numKcal.reduce((sum, current) => sum + current);
-               document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
-
-
-
-            } else {
-               return;
-            }
+            setTimeout(() => {
+               if (n > 0) {
+                  document.querySelector(`#${this.countId}`).innerHTML = --n;
+                  
+                  // видалення класу імг з масива 
+                  let deleted = this.imgKey.pop(this.conImg);
+                  
+                  
+                  // видалення з масива значення останнього відступа
+                  let deletedM = this.pathMargin.pop(this.startMargin);
+                  
+                  
+                  // винесення в масив всіх елементів з класом екземпляра
+                  let a = "." + this.conImg;
+                  let arr = document.querySelectorAll(a);
+                  // привласнення в перемінну значення встановленного відступу видаляйомого елемента
+                  let comparDefin = arr[arr.length - 1].style.top;
+                  console.log(arr.length - 1);
+                  let classForDelAni = (((arr.length - 1) % 2) === 0) ? "for_del_ani_left" : "for_del_ani_right";
+                  arr[arr.length - 1].classList.replace("for_start_ani", classForDelAni);
+                  
+                  // видалення останнього елемента екземпляра
+                  setTimeout(() => {
+                     arr[arr.length - 1].remove();
+                  }, 100);
+                  
+                  let compar = document.querySelectorAll(".for_comparison");
+                  let comparArr = Array.from(compar);
+                  let toChange = comparArr.filter((e) => {
+                     return parseInt(e.style.top) < parseInt(comparDefin);
+                  });
+                  
+                  toChange.forEach((e) => {
+                     e.style.top = `${parseInt(e.style.top) - parseInt(deletedM)}%`;
+                  });
+                  
+                  
+                  
+                  let deletedSum = this.obj.sum.pop(this.price);
+                  let num = this.obj.sum;
+                  let sumprice = num.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
+   
+                  let deletedTime = this.obj.time.pop(this.time);
+                  let numTime = this.obj.time;
+                  let sumTime = numTime.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
+   
+                  let deletedOz = this.obj.oz.pop(this.oz);
+                  let numOz = this.obj.oz;
+                  let sumOz = numOz.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
+   
+                  let deletedKcal = this.obj.kcal.pop(this.kcal);
+                  let numKcal = this.obj.kcal;
+                  let sumKcal = numKcal.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
+   
+   
+   
+               } else {
+                  return;
+               }
+            }, 200);
          });
       }
 
@@ -302,7 +355,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "cutletMinus",
       "cutletPlus",
       "cutletCount",
-      -50
+      -50,
+      generalObj.margin.cutletMar
    );
 
 
@@ -323,7 +377,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "mayoMinus",
       "mayoPlus",
       "mayoCount",
-      -10
+      -10,
+      generalObj.margin.mayoMar
    );
 
 
@@ -343,7 +398,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "onionMinus",
       "onionPlus",
       "onionCount",
-      -10
+      -10,
+      generalObj.margin.onionMar
    );
 
    let tomatoIn = new Ingradiet(
@@ -361,7 +417,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "tomatoMinus",
       "tomatoPlus",
       "tomatoCount",
-      -10
+      -10,
+      generalObj.margin.tomatoMar
    );
 
    let cucumberIn = new Ingradiet(
@@ -379,7 +436,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "cucumberMinus",
       "cucumberPlus",
       "cucumberCount",
-      -10
+      -10,
+      generalObj.margin.cucumberMar
    );
 
    let cheeseIn = new Ingradiet(
@@ -397,7 +455,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "cheeseMinus",
       "cheesePlus",
       "cheeseCount",
-      0
+      -3,
+      generalObj.margin.cheeseMar
    );
 
    let saladIn = new Ingradiet(
@@ -415,7 +474,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "saladMinus",
       "saladPlus",
       "saladCount",
-      -20
+      -20,
+      generalObj.margin.saladMar,
    );
 
    let bunIn = new Ingradiet(
@@ -433,7 +493,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "bunMinus",
       "bunPlus",
       "bunCount",
-      -20
+      -20,
+      generalObj.margin.bunMar
    );
 
 
