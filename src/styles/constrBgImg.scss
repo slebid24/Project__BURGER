@@ -130,6 +130,12 @@
       background-repeat: no-repeat;
       display: block;
       position: absolute;
-      
-      
+      transition: all 0.25s ease-in-out;
+      z-index: 10;
+      animation:  topBunStart 0.3s forwards;
 }
+
+@keyframes topBunStart {
+      0% {opacity: 0;}
+      100% {opacity: 1; }
+      }

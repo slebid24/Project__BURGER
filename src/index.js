@@ -223,18 +223,18 @@ window.addEventListener("DOMContentLoaded", () => {
                let marginFin = concatArr.reduce((sum, current) => sum + current);
                // привласнення сумми всіх відступів останньому створеному елементу
                newItem.style = `top: ${marginFin}%`;
-
                parentSelectorBur.append(newItem);
+
+
                let topBun = document.createElement("div");
                if (lenghthOfArr > 0 && (document.querySelectorAll(".item__topbun").length < 1)) {
-                  
                   topBun.classList.add("item__topbun");
-                  
                   parentSelectorBur.append(topBun);
                }
-               topBun.style = `top: ${parseInt(marginFin) - 100}%`;
-
-               console.log(parseInt(document.querySelectorAll(".item__topbun").length ))
+               document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
+               
+               
+               
 
                this.obj.sum.push(this.price);
                let num = this.obj.sum;
@@ -300,12 +300,33 @@ window.addEventListener("DOMContentLoaded", () => {
                      return parseInt(e.style.top) < parseInt(comparDefin);
                   });
                   
+                  
                   toChange.forEach((e) => {
                      e.style.top = `${parseInt(e.style.top) - parseInt(deletedM)}%`;
                   });
                   
+                  let concatArr = generalObj.margin.cutletMar
+                  .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar, generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar, generalObj.margin.bunMar);
+                  concatArr.unshift(0);
+                  let marginFin = concatArr.reduce((sum, current) => sum + current);
+
+                  setTimeout(() => {
+                     if (lenghthOfArr > 0) {
+                        document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
+                     }
+                  }, 100);
                   
-                  
+                  let deletedNun = this.obj.num.pop(this.num);
+                  let lenghthOfArr = this.obj.num.length;
+
+                  setTimeout(() => {
+                     if (lenghthOfArr == 0) {
+                        document.querySelector(".item__topbun").remove();
+                     }
+                  }, 300);
+
+                  console.log(lenghthOfArr)
+
                   let deletedSum = this.obj.sum.pop(this.price);
                   let num = this.obj.sum;
                   let sumprice = num.reduce((sum, current) => sum + current);
@@ -345,8 +366,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "item__cutlet",
       "cutlet",
       "Cutlet",
-      2,
       3,
+      4,
       7,
       600,
       ".main__botside",
@@ -367,7 +388,7 @@ window.addEventListener("DOMContentLoaded", () => {
       "item__mayo",
       "mayo",
       "Mayo",
-      2,
+      1,
       0.5,
       2,
       150,
@@ -426,7 +447,7 @@ window.addEventListener("DOMContentLoaded", () => {
       "item__cucumber",
       "cucumber",
       "Cucumber",
-      0.3,
+      0.5,
       0.5,
       1,
       40,
@@ -465,7 +486,7 @@ window.addEventListener("DOMContentLoaded", () => {
       "salad",
       "Salad",
       0.5,
-      0.2,
+      0.5,
       1,
       40,
       ".main__botside",
@@ -483,8 +504,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "item__midbun",
       "bun",
       "Bun",
-      0.3,
-      0.2,
+      0.5,
+      0.5,
       1,
       90,
       ".main__botside",
