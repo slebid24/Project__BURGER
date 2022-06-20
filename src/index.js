@@ -230,9 +230,19 @@ window.addEventListener("DOMContentLoaded", () => {
                if (lenghthOfArr > 0 && (document.querySelectorAll(".item__topbun").length < 1)) {
                   topBun.classList.add("item__topbun");
                   parentSelectorBur.append(topBun);
+                  document.querySelector(".item__topbun").animate([
+                     { top: `-400%`, opacity: "0"},
+                     { top: `${parseInt(marginFin) - 90}%`, opacity: "1"}
+                  ], {
+                     duration: 400,
+                     easing: "ease-in-out"
+                  });
                }
                document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
                
+
+
+
                
                
 
@@ -313,17 +323,36 @@ window.addEventListener("DOMContentLoaded", () => {
                   setTimeout(() => {
                      if (lenghthOfArr > 0) {
                         document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
+
                      }
                   }, 100);
                   
                   let deletedNun = this.obj.num.pop(this.num);
                   let lenghthOfArr = this.obj.num.length;
 
-                  setTimeout(() => {
+                  
                      if (lenghthOfArr == 0) {
-                        document.querySelector(".item__topbun").remove();
+                        
+                        let deleteBun = document.querySelector(".item__topbun").animate([
+                           { top: `${parseInt(marginFin) - 90}%`, opacity: "1"},
+                           { top: `-400%`, opacity: "0"}
+                        ], {
+                           duration: 400,
+                           easing: "ease-in-out"
+                        });
+
+                        Promise.all(
+                           document.querySelector(".item__topbun").getAnimations().map(
+                              function(deleteBun) {
+                                 return deleteBun.finished;
+                              }
+                           )
+                        ).then(() => {
+                           document.querySelector(".item__topbun").remove();
+                        }
+                        );
                      }
-                  }, 300);
+                  
 
                   console.log(lenghthOfArr)
 
