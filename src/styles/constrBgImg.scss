@@ -12,13 +12,13 @@
 }
 
 @keyframes ani {
-0% {opacity: 0;}
-100% {opacity: 1; }
+0%    {opacity: 0.8;}
+100%  {opacity: 1; }
 }
 
 @keyframes aniBackLeft {
-0% {opacity: 1; left: 0%}
-100% {opacity: 0; left: -30%}
+0%    {opacity: 1; left: 0%}
+100%  {opacity: 0; left: -30%}
 }
 
 @keyframes aniBackRight {
@@ -132,10 +132,6 @@
       position: absolute;
       transition: all 0.25s ease-in-out;
       z-index: 10;
-      animation:  topBunStart 0.3s forwards;
+      // animation:  topBunStart 0.3s forwards;
 }
 
-@keyframes topBunStart {
-      0% {opacity: 0;}
-      100% {opacity: 1; }
-      }

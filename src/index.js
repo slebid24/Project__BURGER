@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
    const width = window.getComputedStyle(wrapper).width;
    const widthAfterSwipe = window.getComputedStyle(page1).width;
-   
+
 
 
    let offset = 0;
@@ -62,6 +62,14 @@ window.addEventListener("DOMContentLoaded", () => {
       page2.style.marginLeft = widthAfterSwipe;
       secondPageBtn.classList.add("header__page-changer--active");
       firstPageBtn.classList.remove("header__page-changer--active");
+
+      document.querySelectorAll(".main__ingradient").forEach((e, i) => {
+        setTimeout(() => {
+         setTimeout(() => {
+            e.style.opacity = 1;
+         }, i * (100 * (i / 2.5)));
+        }, 250);
+       });
    }
 
    function swipeToFirstPage() {
@@ -195,128 +203,160 @@ window.addEventListener("DOMContentLoaded", () => {
          let n = 0;
 
          document.querySelector(`#${this.btnIdP}`).addEventListener("click", () => {
-            if (n < 10) {
-               // лічильник
-               document.querySelector(`#${this.countId}`).innerHTML = ++n;
-               let parentSelectorBur = document.querySelector(".main__const-inner");   
-
-
-               // додавання класу в масив
-               this.imgKey.push(this.conImg);
-               this.obj.num.push(this.title);
-               let lenghthOfArr = this.obj.num.length;
-               
-               
-               
-               // створення елемента і привласнення йому класу з масива
-               let newItem = document.createElement("div");
-               newItem.classList.add(this.imgKey[this.imgKey.length -1]);
-               newItem.classList.add("for_comparison");
-               newItem.classList.add("for_start_ani");
-
-               // Пуш значення відступу в масив
-               this.pathMargin.push(this.startMargin);
-               // сума всіх відступів
-               let concatArr = generalObj.margin.cutletMar
-               .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar, generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar, generalObj.margin.bunMar);
-               concatArr.unshift(0);
-               let marginFin = concatArr.reduce((sum, current) => sum + current);
-               // привласнення сумми всіх відступів останньому створеному елементу
-               newItem.style = `top: ${marginFin}%`;
-               parentSelectorBur.append(newItem);
-
-
-               let topBun = document.createElement("div");
-               if (lenghthOfArr > 0 && (document.querySelectorAll(".item__topbun").length < 1)) {
-                  topBun.classList.add("item__topbun");
-                  parentSelectorBur.append(topBun);
-                  document.querySelector(".item__topbun").animate([
-                     { top: `-400%`, opacity: "0"},
-                     { top: `${parseInt(marginFin) - 90}%`, opacity: "1"}
+            setTimeout(() => {
+               if (n < 10) {
+                  // лічильник
+                  document.querySelector(`#${this.countId}`).innerHTML = ++n;
+                  let parentSelectorBur = document.querySelector(".main__const-inner");
+   
+   
+                  // додавання класу в масив
+                  this.imgKey.push(this.conImg);
+                  this.obj.num.push(this.title);
+                  let lenghthOfArr = this.obj.num.length;
+   
+   
+   
+                  // створення елемента і привласнення йому класу з масива
+                  let newItem = document.createElement("div");
+                  newItem.classList.add(this.imgKey[this.imgKey.length - 1]);
+                  newItem.classList.add("for_comparison");
+                  newItem.classList.add("for_start_ani");
+   
+                  // Пуш значення відступу в масив
+                  this.pathMargin.push(this.startMargin);
+                  // сума всіх відступів
+                  let concatArr = generalObj.margin.cutletMar
+                     .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar, generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar, generalObj.margin.bunMar);
+                  concatArr.unshift(0);
+                  let marginFin = concatArr.reduce((sum, current) => sum + current);
+                  // привласнення сумми всіх відступів останньому створеному елементу
+                  newItem.style = `top: ${marginFin}%`;
+                  parentSelectorBur.append(newItem);
+   
+   
+                  let topBun = document.createElement("div");
+                  if (lenghthOfArr > 0 && (document.querySelectorAll(".item__topbun").length < 1)) {
+                     topBun.classList.add("item__topbun");
+                     parentSelectorBur.append(topBun);
+                     document.querySelector(".item__topbun").animate([
+                        {
+                           top: `-400%`,
+                           opacity: "0"
+                        },
+                        {
+                           top: `${parseInt(marginFin) - 90}%`,
+                           opacity: "1"
+                        }
+                     ], {
+                        duration: 400,
+                        easing: "ease-in-out"
+                     });
+                  } else {
+                     document.querySelector(".item__topbun").animate([
+                     {
+                        transform: "skew(0)",
+                        top: `${parseInt(marginFin) - 90}%`,
+                        left: "0%"
+                        
+                     },
+                     {
+                        transform: "skew(-5deg, 5deg)",
+                        top: `${(parseInt(marginFin) - 90) - 15}%`,
+                        left: "2%"
+                     },
+                     {
+                        transform: "skew(0)",
+                        top: `${parseInt(marginFin) - 90}%`,
+                        left: "0%"
+                     },
                   ], {
-                     duration: 400,
+                     duration: 500,
                      easing: "ease-in-out"
                   });
+                  }
+                  document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
+   
+                  console.log(marginFin)
+   
+   
+
+                  if (n == 9) {
+                     document.querySelector(".main__ingradient").style.backgroundColor = "#fff";
+                  }
+    
+   
+   
+                  this.obj.sum.push(this.price);
+                  let num = this.obj.sum;
+                  let sumprice = num.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
+   
+                  this.obj.time.push(this.time);
+                  let numTime = this.obj.time;
+                  let sumTime = numTime.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
+   
+                  this.obj.oz.push(this.oz);
+                  let numOz = this.obj.oz;
+                  let sumOz = numOz.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
+   
+                  this.obj.kcal.push(this.kcal);
+                  let numKcal = this.obj.kcal;
+                  let sumKcal = numKcal.reduce((sum, current) => sum + current);
+                  document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
+   
+               } else {
+                  
                }
-               document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
-               
+            }, 100);
 
 
-
-               
-               
-
-               this.obj.sum.push(this.price);
-               let num = this.obj.sum;
-               let sumprice = num.reduce((sum, current) => sum + current);
-               document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
-
-               this.obj.time.push(this.time);
-               let numTime = this.obj.time;
-               let sumTime = numTime.reduce((sum, current) => sum + current);
-               document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
-
-               this.obj.oz.push(this.oz);
-               let numOz = this.obj.oz;
-               let sumOz = numOz.reduce((sum, current) => sum + current);
-               document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
-
-               this.obj.kcal.push(this.kcal);
-               let numKcal = this.obj.kcal;
-               let sumKcal = numKcal.reduce((sum, current) => sum + current);
-               document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
-
-               
-               
-            } else {
-               return;
-            }
-
-            
          });
 
-         
+
 
          document.querySelector(`#${this.btnIdM}`).addEventListener("click", () => {
             setTimeout(() => {
                if (n > 0) {
                   document.querySelector(`#${this.countId}`).innerHTML = --n;
-                  
+
                   // видалення класу імг з масива 
                   let deleted = this.imgKey.pop(this.conImg);
-                  
-                  
+
+
                   // видалення з масива значення останнього відступа
                   let deletedM = this.pathMargin.pop(this.startMargin);
-                  
-                  
+
+
                   // винесення в масив всіх елементів з класом екземпляра
                   let a = "." + this.conImg;
                   let arr = document.querySelectorAll(a);
                   // привласнення в перемінну значення встановленного відступу видаляйомого елемента
                   let comparDefin = arr[arr.length - 1].style.top;
                   console.log(arr.length - 1);
-                  let classForDelAni = (((arr.length - 1) % 2) === 0) ? "for_del_ani_left" : "for_del_ani_right";
+                  let classForDelAni = (((this.obj.num.length - 1) % 2) === 0) ? "for_del_ani_left" : "for_del_ani_right";
                   arr[arr.length - 1].classList.replace("for_start_ani", classForDelAni);
-                  
+
                   // видалення останнього елемента екземпляра
                   setTimeout(() => {
                      arr[arr.length - 1].remove();
                   }, 100);
-                  
+
                   let compar = document.querySelectorAll(".for_comparison");
                   let comparArr = Array.from(compar);
                   let toChange = comparArr.filter((e) => {
                      return parseInt(e.style.top) < parseInt(comparDefin);
                   });
-                  
-                  
+
+
                   toChange.forEach((e) => {
                      e.style.top = `${parseInt(e.style.top) - parseInt(deletedM)}%`;
                   });
-                  
+
                   let concatArr = generalObj.margin.cutletMar
-                  .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar, generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar, generalObj.margin.bunMar);
+                     .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar, generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar, generalObj.margin.bunMar);
                   concatArr.unshift(0);
                   let marginFin = concatArr.reduce((sum, current) => sum + current);
 
@@ -325,34 +365,37 @@ window.addEventListener("DOMContentLoaded", () => {
                         document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
 
                      }
-                  }, 100);
-                  
+                  }, 220);
+
                   let deletedNun = this.obj.num.pop(this.num);
                   let lenghthOfArr = this.obj.num.length;
 
-                  
-                     if (lenghthOfArr == 0) {
-                        
-                        let deleteBun = document.querySelector(".item__topbun").animate([
-                           { top: `${parseInt(marginFin) - 90}%`, opacity: "1"},
-                           { top: `-400%`, opacity: "0"}
-                        ], {
-                           duration: 400,
-                           easing: "ease-in-out"
-                        });
 
-                        Promise.all(
-                           document.querySelector(".item__topbun").getAnimations().map(
-                              function(deleteBun) {
-                                 return deleteBun.finished;
-                              }
-                           )
-                        ).then(() => {
-                           document.querySelector(".item__topbun").remove();
+                  if (lenghthOfArr == 0) {
+                     let deleteBun = document.querySelector(".item__topbun").animate([{
+                           top: `${parseInt(deletedM) - 90}%`,
+                           opacity: "1"
+                        },
+                        {
+                           top: `-400%`,
+                           opacity: "0"
                         }
-                        );
-                     }
-                  
+                     ], {
+                        duration: 400,
+                        easing: "ease-in-out"
+                     });
+
+                     Promise.all(
+                        document.querySelector(".item__topbun").getAnimations().map(
+                           function (deleteBun) {
+                              return deleteBun.finished;
+                           }
+                        )
+                     ).then(() => {
+                        document.querySelector(".item__topbun").remove();
+                     });
+                  }
+
 
                   console.log(lenghthOfArr)
 
@@ -360,24 +403,24 @@ window.addEventListener("DOMContentLoaded", () => {
                   let num = this.obj.sum;
                   let sumprice = num.reduce((sum, current) => sum + current);
                   document.querySelector(".main__total").innerHTML = `$${sumprice.toFixed(2)}`;
-   
+
                   let deletedTime = this.obj.time.pop(this.time);
                   let numTime = this.obj.time;
                   let sumTime = numTime.reduce((sum, current) => sum + current);
                   document.querySelector(".main__time").innerHTML = `${sumTime.toFixed(1)} min`;
-   
+
                   let deletedOz = this.obj.oz.pop(this.oz);
                   let numOz = this.obj.oz;
                   let sumOz = numOz.reduce((sum, current) => sum + current);
                   document.querySelector(".main__capacity").innerHTML = `${sumOz} oz`;
-   
+
                   let deletedKcal = this.obj.kcal.pop(this.kcal);
                   let numKcal = this.obj.kcal;
                   let sumKcal = numKcal.reduce((sum, current) => sum + current);
                   document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
-   
-   
-   
+
+
+
                } else {
                   return;
                }
