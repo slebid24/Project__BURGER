@@ -182,9 +182,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__salad",
       // top
-      19,
+      24,
       // left
-      50,
+      60,
       // width
       40,
       // height
@@ -217,9 +217,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__mayo",
       // top
-      19,
+      20,
       // left
-      55,
+      60,
       // width
       32,
       // height
@@ -252,9 +252,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__cucumber",
       // top
-      22,
+      34,
       // left
-      39,
+      48,
       // width
       15,
       // height
@@ -288,9 +288,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__cucumber",
       // top
-      18,
+      34,
       // left
-      52,
+      60,
       // width
       15,
       // height
@@ -324,7 +324,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // top
       34,
       // left
-      57,
+      60,
       // width
       15,
       // height
@@ -359,9 +359,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__cucumber",
       // top
-      36,
+      34,
       // left
-      74,
+      72,
       // width
       15,
       // height
@@ -395,7 +395,7 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__tomato",
       // top
-      41,
+      50,
       // left
       68,
       // width
@@ -430,9 +430,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__tomato",
       // top
-      52,
+      50,
       // left
-      54,
+      56,
       // width
       16,
       // height
@@ -465,9 +465,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__tomato",
       // top
-      32,
+      50,
       // left
-      36,
+      42,
       // width
       16,
       // height
@@ -571,9 +571,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      32,
+      70,
       // left
-      86,
+      70,
       // width
       11,
       // height
@@ -606,15 +606,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      57,
+      70,
       // left
-      68,
+      60,
       // width
       8,
       // height
       60,
       // zIndex
-      8,
+      7,
       // rotate
       0,
       1,
@@ -641,9 +641,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      56,
+      70,
       // left
-      39,
+      42,
       // width
       11,
       // height
@@ -676,7 +676,7 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      68,
+      70,
       // left
       59,
       // width
@@ -711,9 +711,9 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      72,
+      70,
       // left
-      61,
+      69,
       // width
       16,
       // height
@@ -746,7 +746,7 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      78,
+      70,
       // left
       43,
       // width
