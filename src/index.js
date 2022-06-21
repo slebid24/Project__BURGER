@@ -374,6 +374,24 @@ window.addEventListener("DOMContentLoaded", () => {
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__tomato",
+   //    // top
+   //    41,
+   //    // left
+   //    68,
+   //    // width
+   //    16,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    7,
+   //    // rotate
+   //    18,
+   //    1,
+   //    ".burger",
+   // );
+
    new burgerItem(
       "burger__tomato",
       // top
@@ -387,11 +405,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       7,
       // rotate
-      18,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__tomato",
+   //    // top
+   //    52,
+   //    // left
+   //    54,
+   //    // width
+   //    16,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    7,
+   //    // rotate
+   //    10,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__tomato",
       // top
@@ -405,11 +440,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       7,
       // rotate
-      10,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__tomato",
+   //    // top
+   //    32,
+   //    // left
+   //    36,
+   //    // width
+   //    16,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    7,
+   //    // rotate
+   //    -18,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__tomato",
       // top
@@ -423,10 +475,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       7,
       // rotate
-      -18,
+      0,
       1,
       ".burger",
    );
+
+   // new burgerItem(
+   //    "burger__tomato",
+   //    // top
+   //    52,
+   //    // left
+   //    20,
+   //    // width
+   //    8,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    7,
+   //    // rotate
+   //    45,
+   //    1,
+   //    ".burger",
+   // );
 
    new burgerItem(
       "burger__tomato",
@@ -441,11 +511,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       7,
       // rotate
-      45,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__cutlet",
+   //    // top
+   //    54,
+   //    // left
+   //    55,
+   //    // width
+   //    45,
+   //    // height
+   //    160,
+   //    // zIndex
+   //    6,
+   //    // rotate
+   //    -8,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__cutlet",
       // top
@@ -459,11 +546,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       6,
       // rotate
-      -8,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__onion",
+   //    // top
+   //    32,
+   //    // left
+   //    86,
+   //    // width
+   //    11,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    7,
+   //    // rotate
+   //    25,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__onion",
       // top
@@ -477,11 +581,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       7,
       // rotate
-      25,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__onion",
+   //    // top
+   //    57,
+   //    // left
+   //    68,
+   //    // width
+   //    8,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    8,
+   //    // rotate
+   //    18,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__onion",
       // top
@@ -495,11 +616,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       8,
       // rotate
-      18,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__onion",
+   //    // top
+   //    56,
+   //    // left
+   //    39,
+   //    // width
+   //    11,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    7,
+   //    // rotate
+   //    -30,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__onion",
       // top
@@ -513,11 +651,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       7,
       // rotate
-      -30,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__onion",
+   //    // top
+   //    68,
+   //    // left
+   //    59,
+   //    // width
+   //    16,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    7,
+   //    // rotate
+   //    16,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__onion",
       // top
@@ -531,11 +686,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       7,
       // rotate
-      16,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__onion",
+   //    // top
+   //    72,
+   //    // left
+   //    61,
+   //    // width
+   //    16,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    6,
+   //    // rotate
+   //    -20,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__onion",
       // top
@@ -549,11 +721,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       6,
       // rotate
-      -20,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__onion",
+   //    // top
+   //    78,
+   //    // left
+   //    43,
+   //    // width
+   //    14,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    7,
+   //    // rotate
+   //    20,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__onion",
       // top
@@ -567,11 +756,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       7,
       // rotate
-      20,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__cheese",
+   //    // top
+   //    86,
+   //    // left
+   //    58,
+   //    // width
+   //    42,
+   //    // height
+   //    160,
+   //    // zIndex
+   //    5,
+   //    // rotate
+   //    -16,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__cheese",
       // top
@@ -585,11 +791,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       5,
       // rotate
-      -16,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__salad",
+   //    // top
+   //    90,
+   //    // left
+   //    55,
+   //    // width
+   //    48,
+   //    // height
+   //    130,
+   //    // zIndex
+   //    4,
+   //    // rotate
+   //    0,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__salad",
       // top
@@ -608,6 +831,23 @@ window.addEventListener("DOMContentLoaded", () => {
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__mayo",
+   //    // top
+   //    100,
+   //    // left
+   //    55,
+   //    // width
+   //    32,
+   //    // height
+   //    100,
+   //    // zIndex
+   //    3,
+   //    // rotate
+   //    -10,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__mayo",
       // top
@@ -621,11 +861,28 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       3,
       // rotate
-      -10,
+      0,
       1,
       ".burger",
    );
 
+   // new burgerItem(
+   //    "burger__bun-bot",
+   //    // top
+   //    100,
+   //    // left
+   //    60,
+   //    // width
+   //    38,
+   //    // height
+   //    100,
+   //    // zIndex
+   //    2,
+   //    // rotate
+   //    -12,
+   //    1,
+   //    ".burger",
+   // );
    new burgerItem(
       "burger__bun-bot",
       // top
@@ -639,7 +896,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // zIndex
       2,
       // rotate
-      -12,
+      0,
       1,
       ".burger",
    );
