@@ -32,13 +32,25 @@
    }
 
    &__content{
-      background-image: url(../images/backgr.png);
-      background-repeat: no-repeat;
-      background-position: bottom 50% right 30%;
-      background-size: 55%;
+      
+   
       width: 100%;
       display: flex;
       position: relative;
+   }
+
+   &__backgr-img{
+      background-image: url(../images/backgr.png);
+      background-repeat: no-repeat;
+      
+      background-size: 46%;
+      
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: -10%;
+      left: 37%;
+      
    }
 
    &__btn{
@@ -104,6 +116,19 @@
       height: 100%;
       width: 100%;
       position: relative;
+      
+   }
+
+   &__bg-img2{
+      background-image: url(/src/images/bg2.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 30%;
+      top: -22%;
+      left: -1%;
+      height: 100%;
+      width: 100%;
+      position: absolute;
    }
 
    &__topside{
@@ -126,8 +151,11 @@
 
    &__content-wrapper{
       display: flex;
+      
+      
+      
    }
-
+   
    &__const{
       width: 500px;
       
@@ -142,6 +170,7 @@
       height: 135px;
       background-image: url(/src/images/default__land.svg);
       background-position: center;
+      background-repeat: no-repeat;
       display: block;
       margin: 0 auto;
    }

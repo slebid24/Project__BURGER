@@ -26,13 +26,14 @@ window.addEventListener("DOMContentLoaded", () => {
    const mainBtn = document.querySelector(".main__btn");
    const topBtns = document.querySelectorAll(".header__page-changer");
 
-   const width = window.getComputedStyle(wrapper).width;
-   const widthAfterSwipe = window.getComputedStyle(page1).width;
+   const width = wrapper.offsetWidth;
+   const widthAfterSwipe = page1.offsetWidth;
 
-
+   console.log(width)
 
    let offset = 0;
-   field.style.width = 100 * pages.length + "vw";
+   field.style.width = width * pages.length + "px";
+   page2.style.width = width + "px";
    field.style.display = "flex";
    field.style.transition = "0.8s all";
 
@@ -41,10 +42,9 @@ window.addEventListener("DOMContentLoaded", () => {
       slide.style.width = width;
    });
 
+   console.log(wrapper.offsetWidth)
 
-   function deleteNotDigits(str) {
-      return +str.slice(0, str.length - 2);
-   }
+   
 
    page2.style.display = "none";
    firstPageBtn.classList.add("header__page-changer--active");
@@ -52,14 +52,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
    function swipeToSecondPage() {
       if (offset == 0) {
-         offset += deleteNotDigits(width);
+         offset += width;
       } else {
          return;
       }
       field.style.transform = `translateX(-${offset}px)`;
       page1.style.display = "none";
       page2.style.display = "flex";
-      page2.style.marginLeft = widthAfterSwipe;
+      page2.style.marginLeft = `${widthAfterSwipe}px`;
       secondPageBtn.classList.add("header__page-changer--active");
       firstPageBtn.classList.remove("header__page-changer--active");
 
@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
    function swipeToFirstPage() {
       if (offset > 0) {
-         offset -= deleteNotDigits(width);
+         offset -= width;
       } else {
          return;
       }
@@ -84,13 +84,577 @@ window.addEventListener("DOMContentLoaded", () => {
       page2.style.marginLeft = widthAfterSwipe;
       firstPageBtn.classList.add("header__page-changer--active");
       secondPageBtn.classList.remove("header__page-changer--active");
+
+      document.querySelectorAll(".main__ingradient").forEach(e => {
+         e.style.opacity = 0;
+      });
    }
-
-
 
    secondPageBtn.addEventListener("click", swipeToSecondPage);
    mainBtn.addEventListener("click", swipeToSecondPage);
    firstPageBtn.addEventListener("click", swipeToFirstPage);
+
+
+   class burgerItem {
+      constructor(cssClass, top, left, width, height, zIndex, rotate, scale, parentSelector) {
+         this.cssClass = cssClass;
+         this.top = top;
+         this.left = left;
+         this.width = width;
+         this.height = height;
+         this.zIndex = zIndex;
+         this.rotate = rotate;
+         this.scale = scale;
+         this.parent = document.querySelector(parentSelector);
+         this.renderBurger();
+      }
+
+      renderBurger() {
+         const element = document.createElement("div");
+         element.innerHTML = `
+               <div></div>
+            `;
+         this.parent.append(element);
+         element.classList.add(`${this.cssClass}`);
+
+         element.style.cssText = `
+            top: ${this.top - 5}%;
+            left: ${this.left}%;
+            width: ${this.width + 2}%;
+            height: ${this.height}px;
+            z-index: ${this.zIndex};
+            transform: translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale});
+         `;
+      }
+   }
+
+   // new burgerItem(
+   //    "burger__bun-top",
+   //    // top
+   //    5,
+   //    // left
+   //    60,
+   //    // width
+   //    40,
+   //    // height
+   //    220,
+   //    // zIndex
+   //    10,
+   //    // rotate
+   //    30,
+   //    1,
+   //    ".burger",
+   // );
+   new burgerItem(
+      "burger__bun-top",
+      // top
+      5,
+      // left
+      60,
+      // width
+      40,
+      // height
+      220,
+      // zIndex
+      10,
+      // rotate
+      0,
+      1,
+      ".burger",
+   );
+   // new burgerItem(
+   //    "burger__salad",
+   //    // top
+   //    9,
+   //    // left
+   //    50,
+   //    // width
+   //    40,
+   //    // height
+   //    130,
+   //    // zIndex
+   //    9,
+   //    // rotate
+   //    25,
+   //    1,
+   //    ".burger",
+   // );
+   new burgerItem(
+      "burger__salad",
+      // top
+      19,
+      // left
+      50,
+      // width
+      40,
+      // height
+      130,
+      // zIndex
+      9,
+      // rotate
+      0,
+      1,
+      ".burger",
+   );
+
+   // new burgerItem(
+   //    "burger__mayo",
+   //    // top
+   //    19,
+   //    // left
+   //    55,
+   //    // width
+   //    32,
+   //    // height
+   //    100,
+   //    // zIndex
+   //    9,
+   //    // rotate
+   //    30,
+   //    -1,
+   //    ".burger",
+   // );
+   new burgerItem(
+      "burger__mayo",
+      // top
+      19,
+      // left
+      55,
+      // width
+      32,
+      // height
+      100,
+      // zIndex
+      9,
+      // rotate
+      0,
+      -1,
+      ".burger",
+   );
+
+   // new burgerItem(
+   //    "burger__cucumber",
+   //    // top
+   //    22,
+   //    // left
+   //    39,
+   //    // width
+   //    15,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    8,
+   //    // rotate
+   //    20,
+   //    1,
+   //    ".burger",
+   // );
+   new burgerItem(
+      "burger__cucumber",
+      // top
+      22,
+      // left
+      39,
+      // width
+      15,
+      // height
+      60,
+      // zIndex
+      8,
+      // rotate
+      0,
+      1,
+      ".burger",
+   );
+   
+
+   // new burgerItem(
+   //    "burger__cucumber",
+   //    // top
+   //    18,
+   //    // left
+   //    52,
+   //    // width
+   //    15,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    8,
+   //    // rotate
+   //    30,
+   //    1,
+   //    ".burger",
+   // );
+   new burgerItem(
+      "burger__cucumber",
+      // top
+      18,
+      // left
+      52,
+      // width
+      15,
+      // height
+      60,
+      // zIndex
+      8,
+      // rotate
+      0,
+      1,
+      ".burger",
+   );
+   // new burgerItem(
+   //    "burger__cucumber",
+   //    // top
+   //    34,
+   //    // left
+   //    57,
+   //    // width
+   //    15,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    8,
+   //    // rotate
+   //    -10,
+   //    1,
+   //    ".burger",
+   // );
+   new burgerItem(
+      "burger__cucumber",
+      // top
+      34,
+      // left
+      57,
+      // width
+      15,
+      // height
+      60,
+      // zIndex
+      8,
+      // rotate
+      0,
+      1,
+      ".burger",
+   );
+
+   
+
+   // new burgerItem(
+   //    "burger__cucumber",
+   //    // top
+   //    36,
+   //    // left
+   //    74,
+   //    // width
+   //    15,
+   //    // height
+   //    60,
+   //    // zIndex
+   //    8,
+   //    // rotate
+   //    40,
+   //    1,
+   //    ".burger",
+   // );
+   new burgerItem(
+      "burger__cucumber",
+      // top
+      36,
+      // left
+      74,
+      // width
+      15,
+      // height
+      60,
+      // zIndex
+      8,
+      // rotate
+      0,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__tomato",
+      // top
+      41,
+      // left
+      68,
+      // width
+      16,
+      // height
+      60,
+      // zIndex
+      7,
+      // rotate
+      18,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__tomato",
+      // top
+      52,
+      // left
+      54,
+      // width
+      16,
+      // height
+      60,
+      // zIndex
+      7,
+      // rotate
+      10,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__tomato",
+      // top
+      32,
+      // left
+      36,
+      // width
+      16,
+      // height
+      60,
+      // zIndex
+      7,
+      // rotate
+      -18,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__tomato",
+      // top
+      52,
+      // left
+      20,
+      // width
+      8,
+      // height
+      60,
+      // zIndex
+      7,
+      // rotate
+      45,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__cutlet",
+      // top
+      54,
+      // left
+      55,
+      // width
+      45,
+      // height
+      160,
+      // zIndex
+      6,
+      // rotate
+      -8,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__onion",
+      // top
+      32,
+      // left
+      86,
+      // width
+      11,
+      // height
+      60,
+      // zIndex
+      7,
+      // rotate
+      25,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__onion",
+      // top
+      57,
+      // left
+      68,
+      // width
+      8,
+      // height
+      60,
+      // zIndex
+      8,
+      // rotate
+      18,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__onion",
+      // top
+      56,
+      // left
+      39,
+      // width
+      11,
+      // height
+      60,
+      // zIndex
+      7,
+      // rotate
+      -30,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__onion",
+      // top
+      68,
+      // left
+      59,
+      // width
+      16,
+      // height
+      60,
+      // zIndex
+      7,
+      // rotate
+      16,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__onion",
+      // top
+      72,
+      // left
+      61,
+      // width
+      16,
+      // height
+      60,
+      // zIndex
+      6,
+      // rotate
+      -20,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__onion",
+      // top
+      78,
+      // left
+      43,
+      // width
+      14,
+      // height
+      60,
+      // zIndex
+      7,
+      // rotate
+      20,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__cheese",
+      // top
+      86,
+      // left
+      58,
+      // width
+      42,
+      // height
+      160,
+      // zIndex
+      5,
+      // rotate
+      -16,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__salad",
+      // top
+      90,
+      // left
+      55,
+      // width
+      48,
+      // height
+      130,
+      // zIndex
+      4,
+      // rotate
+      0,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__mayo",
+      // top
+      100,
+      // left
+      55,
+      // width
+      32,
+      // height
+      100,
+      // zIndex
+      3,
+      // rotate
+      -10,
+      1,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__bun-bot",
+      // top
+      100,
+      // left
+      60,
+      // width
+      38,
+      // height
+      100,
+      // zIndex
+      2,
+      // rotate
+      -12,
+      1,
+      ".burger",
+   );
+
+
+   
+
+
+
+
+
+
+
+
+
 
    // Ефект меню
    topBtns.forEach((elem) => {
