@@ -91,19 +91,20 @@ window.addEventListener("DOMContentLoaded", () => {
    }
 
    secondPageBtn.addEventListener("click", swipeToSecondPage);
-   mainBtn.addEventListener("click", swipeToSecondPage);
+   // mainBtn.addEventListener("click", swipeToSecondPage);
    firstPageBtn.addEventListener("click", swipeToFirstPage);
 
 
    class burgerItem {
-      constructor(cssClass, top, topA, left, leftA, width, widthA, height, zIndex, zIndexA, rotate, rotateA, scale, parentSelector) {
+      constructor(cssClass, top, topA, left, leftA, width, widthA, 
+      height, zIndex, zIndexA, rotate, rotateA, scale, parentSelector) {
          this.cssClass = cssClass;
          this.top = top;
          this.topA = topA;
          this.left = left;
          this.leftA = leftA;
          this.width = width;
-         this.width = widthA;
+         this.widthA = widthA;
          this.height = height;
          this.zIndex = zIndex;
          this.zIndexA = zIndexA;
@@ -112,23 +113,28 @@ window.addEventListener("DOMContentLoaded", () => {
          this.scale = scale;
          this.parent = document.querySelector(parentSelector);
          this.renderBurger();
+         this.burgerAni();
+         this.startAniPart2();
       }
 
       renderBurger() {
-         const element = document.createElement("div");
-         element.innerHTML = `
+         const item = document.createElement("div");
+         item.innerHTML = `
                <div></div>
             `;
-         this.parent.append(element);
-         element.classList.add(`${this.cssClass}`);
+         
+         this.parent.append(item);
+         item.classList.add(`${this.cssClass}`);
+         
+   
 
-         element.style.cssText = `
-            top: ${this.top - 5}%;
-            left: ${this.left}%;
-            width: ${this.width + 2}%;
+         item.style.cssText = `
+            top: ${this.topA}%;
+            left: ${this.leftA}%;
+            width: ${this.widthA}%;
             height: ${this.height}px;
-            z-index: ${this.zIndex};
-            transform: translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale});
+            z-index: ${this.zIndexA};
+            transform: translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale});
             background-size: 90%;
             background-position: center;
             background-repeat: no-repeat;
@@ -136,9 +142,73 @@ window.addEventListener("DOMContentLoaded", () => {
             position: absolute;
          `;
       }
+      
+      startAniPart2() {
+         document.querySelector(`.${this.cssClass}`).animate([
+            { top: `${this.topA}%`, left: `${this.leftA}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`, zIndex: `${this.zIndexA}` },
+            { top: `${this.top - 5}%`, left: `${this.left}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale}`,
+            width: `${this.width + 2}%`, zIndex: `${this.zIndex}` }
+         ], {
+            duration: 1000,
+            easing: "ease",
+         });
+            
+      }
+
+
+      burgerAni() {
+         
+         mainBtn.addEventListener("click", () => {
+            document.querySelector(`.${this.cssClass}`).animate([
+            { top: `${this.topA}%`, left: `${this.leftA}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`, zIndex: `${this.zIndexA}` },
+            {top: `${this.topA + 1}%`, left: `${this.leftA + 1}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`, zIndex: `${this.zIndexA}`},
+            {top: `${this.topA - 1}%`, left: `${this.leftA - 1}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`, zIndex: `${this.zIndexA}`},
+            { top: `${this.topA}%`, left: `${this.leftA}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`, zIndex: `${this.zIndexA}` },
+            { top: `${this.topA - 1}%`, left: `${this.leftA + 1}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`, zIndex: `${this.zIndexA}` },
+            { top: `${this.topA + 1}%`, left: `${this.leftA - 1}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`, zIndex: `${this.zIndexA}` },
+            { top: `${this.topA}%`, left: `${this.leftA}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`, zIndex: `${this.zIndexA}` },
+         ],{
+            duration: 700,
+            iterations: 2,
+            easing: "linear",
+         });
+
+            Promise.all(
+               document.querySelector(`.${this.cssClass}`).getAnimations().map(
+                  function (startAniPart1) {
+                     return startAniPart1.finished;
+                  }
+               )
+            ).then(() => {
+              this.startAniPart2();
+            });
+
+            
+            
+            
+         });
+      }
+      
    }
 
-   new burgerItem(
+   let bunTop = new burgerItem(
       "burger__bun-top",
       // top
       5,
@@ -153,6 +223,7 @@ window.addEventListener("DOMContentLoaded", () => {
       220,
       // zIndex
       10,
+      10,
       // rotate
       30,
       0,
@@ -160,756 +231,485 @@ window.addEventListener("DOMContentLoaded", () => {
       ".burger",
    );
    
-   // new burgerItem(
-   //    "burger__salad",
-   //    // top
-   //    9,
-   //    // left
-   //    50,
-   //    // width
-   //    40,
-   //    // height
-   //    130,
-   //    // zIndex
-   //    9,
-   //    // rotate
-   //    25,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__salad",
+      "burger__salad-top",
       // top
+      9,
       40,
       // left
+      50,
       57,
       // width
+      40,
       45,
       // height
       130,
       // zIndex
       9,
+      9,
       // rotate
+      25,
       0,
       1,
       ".burger",
    );
-
-   // new burgerItem(
-   //    "burger__mayo",
-   //    // top
-   //    19,
-   //    // left
-   //    55,
-   //    // width
-   //    32,
-   //    // height
-   //    100,
-   //    // zIndex
-   //    9,
-   //    // rotate
-   //    30,
-   //    -1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__mayo",
+      "burger__mayo-top",
       // top
+      19,
       36,
       // left
+      55,
       57,
       // width
+      32,
       37,
       // height
       100,
       // zIndex
       9,
+      9,
       // rotate
+      30,
       0,
       -1,
       ".burger",
    );
-
-   // new burgerItem(
-   //    "burger__cucumber",
-   //    // top
-   //    22,
-   //    // left
-   //    39,
-   //    // width
-   //    15,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    8,
-   //    // rotate
-   //    20,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__cucumber",
+      "burger__cucumber-1",
       // top
+      22,
       45,
       // left
+      39,
       45,
       // width
+      15,
       17,
       // height
       60,
       // zIndex
       8,
+      8,
       // rotate
+      20,
+      0,
+      1,
+      ".burger",
+   );
+   new burgerItem(
+      "burger__cucumber-2",
+      // top
+      18,
+      45,
+      // left
+      52,
+      57,
+      // width
+      15,
+      17,
+      // height
+      60,
+      // zIndex
+      8,
+      8,
+      // rotate
+      30,
+      0,
+      1,
+      ".burger",
+   );
+   new burgerItem(
+      "burger__cucumber-3",
+      // top
+      34,
+      45,
+      // left
+      57,
+      57,
+      // width
+      15,
+      17,
+      // height
+      60,
+      // zIndex
+      8,
+      8,
+      // rotate
+      -10,
       0,
       1,
       ".burger",
    );
    
-
-   // new burgerItem(
-   //    "burger__cucumber",
-   //    // top
-   //    18,
-   //    // left
-   //    52,
-   //    // width
-   //    15,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    8,
-   //    // rotate
-   //    30,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__cucumber",
+      "burger__cucumber-4",
       // top
+      36,
       45,
       // left
-      57,
-      // width
-      17,
-      // height
-      60,
-      // zIndex
-      8,
-      // rotate
-      0,
-      1,
-      ".burger",
-   );
-   // new burgerItem(
-   //    "burger__cucumber",
-   //    // top
-   //    34,
-   //    // left
-   //    57,
-   //    // width
-   //    15,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    8,
-   //    // rotate
-   //    -10,
-   //    1,
-   //    ".burger",
-   // );
-   new burgerItem(
-      "burger__cucumber",
-      // top
-      45,
-      // left
-      57,
-      // width
-      17,
-      // height
-      60,
-      // zIndex
-      8,
-      // rotate
-      0,
-      1,
-      ".burger",
-   );
-
-   
-
-   // new burgerItem(
-   //    "burger__cucumber",
-   //    // top
-   //    36,
-   //    // left
-   //    74,
-   //    // width
-   //    15,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    8,
-   //    // rotate
-   //    40,
-   //    1,
-   //    ".burger",
-   // );
-   new burgerItem(
-      "burger__cucumber",
-      // top
-      45,
-      // left
+      74,
       70,
       // width
+      15,
       17,
       // height
       60,
       // zIndex
       8,
+      8,
       // rotate
+      40,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__tomato",
-   //    // top
-   //    41,
-   //    // left
-   //    68,
-   //    // width
-   //    16,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    7,
-   //    // rotate
-   //    18,
-   //    1,
-   //    ".burger",
-   // );
-
    new burgerItem(
-      "burger__tomato",
+      "burger__tomato-1",
       // top
+      41,
       50,
       // left
+      68,
       69,
       // width
+      16,
       19,
       // height
       60,
       // zIndex
       7,
+      7,
       // rotate
+      18,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__tomato",
-   //    // top
-   //    52,
-   //    // left
-   //    54,
-   //    // width
-   //    16,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    7,
-   //    // rotate
-   //    10,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__tomato",
+      "burger__tomato-2",
       // top
+      52,
       50,
       // left
+      54,
       59,
       // width
+      16,
       19,
       // height
       60,
       // zIndex
       7,
+      7,
       // rotate
+      10,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__tomato",
-   //    // top
-   //    32,
-   //    // left
-   //    36,
-   //    // width
-   //    16,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    7,
-   //    // rotate
-   //    -18,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__tomato",
+      "burger__tomato-3",
       // top
+      32,
       50,
       // left
+      36,
       46,
       // width
+      16,
       19,
       // height
       60,
       // zIndex
       7,
+      7,
       // rotate
+      -18,
       0,
       1,
       ".burger",
    );
-
-   // new burgerItem(
-   //    "burger__tomato",
-   //    // top
-   //    52,
-   //    // left
-   //    20,
-   //    // width
-   //    8,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    7,
-   //    // rotate
-   //    45,
-   //    1,
-   //    ".burger",
-   // );
 
    new burgerItem(
-      "burger__tomato",
+      "burger__tomato-4",
       // top
+      52,
       50,
       // left
+      20,
       59,
       // width
+      8,
       19,
       // height
       60,
       // zIndex
-      7,
+      1,
+      1,
       // rotate
+      45,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__cutlet",
-   //    // top
-   //    54,
-   //    // left
-   //    55,
-   //    // width
-   //    45,
-   //    // height
-   //    160,
-   //    // zIndex
-   //    6,
-   //    // rotate
-   //    -8,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
       "burger__cutlet",
       // top
       54,
+      54,
       // left
+      55,
       58,
       // width
+      45,
       45,
       // height
       160,
       // zIndex
       6,
+      6,
       // rotate
+      -8,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__onion",
-   //    // top
-   //    32,
-   //    // left
-   //    86,
-   //    // width
-   //    11,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    7,
-   //    // rotate
-   //    25,
-   //    1,
-   //    ".burger",
-   // );
+
    new burgerItem(
-      "burger__onion",
+      "burger__onion-1",
       // top
+      32,
       67,
       // left
+      86,
       70,
       // width
-      16,
+      11,
+      12,
       // height
       60,
       // zIndex
-      5,
+      1,
+      1,
       // rotate
+      25,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__onion",
-   //    // top
-   //    57,
-   //    // left
-   //    68,
-   //    // width
-   //    8,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    8,
-   //    // rotate
-   //    18,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__onion",
+      "burger__onion-2",
       // top
+      57,
       67,
       // left
+      68,
       60,
       // width
+      8,
       16,
       // height
       60,
       // zIndex
+      30,
       5,
       // rotate
+      18,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__onion",
-   //    // top
-   //    56,
-   //    // left
-   //    39,
-   //    // width
-   //    11,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    7,
-   //    // rotate
-   //    -30,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__onion",
+      "burger__onion-3",
       // top
+      56,
       67,
       // left
+      39,
       45,
       // width
+      11,
       16,
       // height
       60,
       // zIndex
+      30,
       5,
       // rotate
+      -30,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__onion",
-   //    // top
-   //    68,
-   //    // left
-   //    59,
-   //    // width
-   //    16,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    7,
-   //    // rotate
-   //    16,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__onion",
+      "burger__onion-4",
       // top
+      68,
       67,
       // left
       59,
+      59,
       // width
+      16,
       16,
       // height
       60,
       // zIndex
+      7,
       5,
       // rotate
+      16,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__onion",
-   //    // top
-   //    72,
-   //    // left
-   //    61,
-   //    // width
-   //    16,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    6,
-   //    // rotate
-   //    -20,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__onion",
+      "burger__onion-5",
       // top
+      72,
       67,
       // left
+      61,
       70,
       // width
       16,
-      // height
-      60,
-      // zIndex
-      5,
-      // rotate
-      0,
-      1,
-      ".burger",
-   );
-
-   // new burgerItem(
-   //    "burger__onion",
-   //    // top
-   //    78,
-   //    // left
-   //    43,
-   //    // width
-   //    14,
-   //    // height
-   //    60,
-   //    // zIndex
-   //    7,
-   //    // rotate
-   //    20,
-   //    1,
-   //    ".burger",
-   // );
-   new burgerItem(
-      "burger__onion",
-      // top
-      67,
-      // left
-      45,
-      // width
       16,
       // height
       60,
       // zIndex
+      7,
       5,
       // rotate
+      -20,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__cheese",
-   //    // top
-   //    86,
-   //    // left
-   //    58,
-   //    // width
-   //    42,
-   //    // height
-   //    160,
-   //    // zIndex
-   //    5,
-   //    // rotate
-   //    -16,
-   //    1,
-   //    ".burger",
-   // );
+   new burgerItem(
+      "burger__onion-6",
+      // top
+      78,
+      67,
+      // left
+      43,
+      45,
+      // width
+      14,
+      16,
+      // height
+      60,
+      // zIndex
+      7,
+      5,
+      // rotate
+      20,
+      0,
+      1,
+      ".burger",
+   );
+
    new burgerItem(
       "burger__cheese",
       // top
+      86,
       73,
       // left
       58,
+      58,
       // width
+      42,
       42,
       // height
       160,
       // zIndex
+      5,
       4,
       // rotate
+      -16,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__salad",
-   //    // top
-   //    90,
-   //    // left
-   //    55,
-   //    // width
-   //    48,
-   //    // height
-   //    130,
-   //    // zIndex
-   //    4,
-   //    // rotate
-   //    0,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__salad",
+      "burger__salad-bot",
       // top
+      90,
       72,
       // left
+      55,
       57,
       // width
+      48,
       45,
       // height
       130,
       // zIndex
+      4,
       3,
       // rotate
+      0,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__mayo",
-   //    // top
-   //    100,
-   //    // left
-   //    55,
-   //    // width
-   //    32,
-   //    // height
-   //    100,
-   //    // zIndex
-   //    3,
-   //    // rotate
-   //    -10,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
-      "burger__mayo",
+      "burger__mayo-bot",
       // top
+      100,
       78,
       // left
+      55,
       58,
       // width
+      32,
       37,
       // height
       100,
       // zIndex
+      3,
       2,
       // rotate
+      -10,
       0,
       1,
       ".burger",
    );
 
-   // new burgerItem(
-   //    "burger__bun-bot",
-   //    // top
-   //    100,
-   //    // left
-   //    60,
-   //    // width
-   //    38,
-   //    // height
-   //    120,
-   //    // zIndex
-   //    2,
-   //    // rotate
-   //    -12,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
       "burger__bun-bot",
       // top
+      100,
       83,
       // left
+      60,
       58,
       // width
+      38,
       44,
       // height
       120,
       // zIndex
+      2,
       1,
       // rotate
+      -12,
       0,
       1,
       ".burger",
    );
-
-
-   
-
-
-
-
-
-
-
-
-
 
    // Ефект меню
    topBtns.forEach((elem) => {
