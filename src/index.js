@@ -96,14 +96,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
    class burgerItem {
-      constructor(cssClass, top, left, width, height, zIndex, rotate, scale, parentSelector) {
+      constructor(cssClass, top, topA, left, leftA, width, widthA, height, zIndex, zIndexA, rotate, rotateA, scale, parentSelector) {
          this.cssClass = cssClass;
          this.top = top;
+         this.topA = topA;
          this.left = left;
+         this.leftA = leftA;
          this.width = width;
+         this.width = widthA;
          this.height = height;
          this.zIndex = zIndex;
+         this.zIndexA = zIndexA;
          this.rotate = rotate;
+         this.rotateA = rotateA;
          this.scale = scale;
          this.parent = document.querySelector(parentSelector);
          this.renderBurger();
@@ -124,44 +129,37 @@ window.addEventListener("DOMContentLoaded", () => {
             height: ${this.height}px;
             z-index: ${this.zIndex};
             transform: translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale});
+            background-size: 90%;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: block;
+            position: absolute;
          `;
       }
    }
 
-   // new burgerItem(
-   //    "burger__bun-top",
-   //    // top
-   //    5,
-   //    // left
-   //    60,
-   //    // width
-   //    40,
-   //    // height
-   //    220,
-   //    // zIndex
-   //    10,
-   //    // rotate
-   //    30,
-   //    1,
-   //    ".burger",
-   // );
    new burgerItem(
       "burger__bun-top",
       // top
       5,
+      19,
       // left
       60,
+      57.5,
       // width
       40,
+      44,
       // height
       220,
       // zIndex
       10,
       // rotate
+      30,
       0,
       1,
       ".burger",
    );
+   
    // new burgerItem(
    //    "burger__salad",
    //    // top
@@ -182,11 +180,11 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__salad",
       // top
-      24,
-      // left
-      60,
-      // width
       40,
+      // left
+      57,
+      // width
+      45,
       // height
       130,
       // zIndex
@@ -217,11 +215,11 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__mayo",
       // top
-      20,
+      36,
       // left
-      60,
+      57,
       // width
-      32,
+      37,
       // height
       100,
       // zIndex
@@ -252,11 +250,11 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__cucumber",
       // top
-      34,
+      45,
       // left
-      48,
+      45,
       // width
-      15,
+      17,
       // height
       60,
       // zIndex
@@ -288,11 +286,11 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__cucumber",
       // top
-      34,
+      45,
       // left
-      60,
+      57,
       // width
-      15,
+      17,
       // height
       60,
       // zIndex
@@ -322,11 +320,11 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__cucumber",
       // top
-      34,
+      45,
       // left
-      60,
+      57,
       // width
-      15,
+      17,
       // height
       60,
       // zIndex
@@ -359,11 +357,11 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__cucumber",
       // top
-      34,
+      45,
       // left
-      72,
+      70,
       // width
-      15,
+      17,
       // height
       60,
       // zIndex
@@ -397,9 +395,9 @@ window.addEventListener("DOMContentLoaded", () => {
       // top
       50,
       // left
-      68,
+      69,
       // width
-      16,
+      19,
       // height
       60,
       // zIndex
@@ -432,9 +430,9 @@ window.addEventListener("DOMContentLoaded", () => {
       // top
       50,
       // left
-      56,
+      59,
       // width
-      16,
+      19,
       // height
       60,
       // zIndex
@@ -467,9 +465,9 @@ window.addEventListener("DOMContentLoaded", () => {
       // top
       50,
       // left
-      42,
+      46,
       // width
-      16,
+      19,
       // height
       60,
       // zIndex
@@ -501,11 +499,11 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__tomato",
       // top
-      52,
+      50,
       // left
-      20,
+      59,
       // width
-      8,
+      19,
       // height
       60,
       // zIndex
@@ -538,7 +536,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // top
       54,
       // left
-      55,
+      58,
       // width
       45,
       // height
@@ -571,15 +569,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      70,
+      67,
       // left
       70,
       // width
-      11,
+      16,
       // height
       60,
       // zIndex
-      7,
+      5,
       // rotate
       0,
       1,
@@ -606,15 +604,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      70,
+      67,
       // left
       60,
       // width
-      8,
+      16,
       // height
       60,
       // zIndex
-      7,
+      5,
       // rotate
       0,
       1,
@@ -641,15 +639,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      70,
+      67,
       // left
-      42,
+      45,
       // width
-      11,
+      16,
       // height
       60,
       // zIndex
-      7,
+      5,
       // rotate
       0,
       1,
@@ -676,7 +674,7 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      70,
+      67,
       // left
       59,
       // width
@@ -684,7 +682,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // height
       60,
       // zIndex
-      7,
+      5,
       // rotate
       0,
       1,
@@ -711,15 +709,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      70,
+      67,
       // left
-      69,
+      70,
       // width
       16,
       // height
       60,
       // zIndex
-      6,
+      5,
       // rotate
       0,
       1,
@@ -746,15 +744,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__onion",
       // top
-      70,
+      67,
       // left
-      43,
+      45,
       // width
-      14,
+      16,
       // height
       60,
       // zIndex
-      7,
+      5,
       // rotate
       0,
       1,
@@ -781,7 +779,7 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__cheese",
       // top
-      86,
+      73,
       // left
       58,
       // width
@@ -789,7 +787,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // height
       160,
       // zIndex
-      5,
+      4,
       // rotate
       0,
       1,
@@ -816,15 +814,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__salad",
       // top
-      90,
+      72,
       // left
-      55,
+      57,
       // width
-      48,
+      45,
       // height
       130,
       // zIndex
-      4,
+      3,
       // rotate
       0,
       1,
@@ -851,15 +849,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__mayo",
       // top
-      100,
+      78,
       // left
-      55,
+      58,
       // width
-      32,
+      37,
       // height
       100,
       // zIndex
-      3,
+      2,
       // rotate
       0,
       1,
@@ -875,7 +873,7 @@ window.addEventListener("DOMContentLoaded", () => {
    //    // width
    //    38,
    //    // height
-   //    100,
+   //    120,
    //    // zIndex
    //    2,
    //    // rotate
@@ -886,15 +884,15 @@ window.addEventListener("DOMContentLoaded", () => {
    new burgerItem(
       "burger__bun-bot",
       // top
-      100,
+      83,
       // left
-      60,
+      58,
       // width
-      38,
+      44,
       // height
-      100,
+      120,
       // zIndex
-      2,
+      1,
       // rotate
       0,
       1,
