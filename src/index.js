@@ -26,18 +26,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
    const width = wrapper.offsetWidth;
    const widthAfterSwipe = page1.offsetWidth;
-
    let offset = 0;
+   
    field.style.width = width * pages.length + "px";
    page2.style.width = width + "px";
    field.style.display = "flex";
    field.style.transition = "0.8s all";
 
-
    pages.forEach(slide => {
       slide.style.width = width;
    });
-
 
    page2.style.display = "none";
    firstPageBtn.classList.add("header__page-changer--active");
@@ -57,10 +55,11 @@ window.addEventListener("DOMContentLoaded", () => {
       firstPageBtn.classList.remove("header__page-changer--active");
 
       document.querySelectorAll(".main__ingradient").forEach((e, i) => {
+         let timing = i * (100 * (i / 2.5));
          setTimeout(() => {
             setTimeout(() => {
                e.style.opacity = 1;
-            }, i * (100 * (i / 2.5)));
+            }, timing);
          }, 250);
       });
    }
@@ -83,9 +82,11 @@ window.addEventListener("DOMContentLoaded", () => {
       });
    }
 
+   
+
    class burgerItem {
       constructor(cssClass, top, topA, left, leftA, width, widthA,
-         height, zIndex, zIndexA, rotate, rotateA, scale, parentSelector) {
+         height, zIndex, zIndexA, rotate, rotateA, scale, duration, parentSelector) {
          this.cssClass = cssClass;
          this.top = top;
          this.topA = topA;
@@ -99,40 +100,44 @@ window.addEventListener("DOMContentLoaded", () => {
          this.rotate = rotate;
          this.rotateA = rotateA;
          this.scale = scale;
+         this.duration = duration;
          this.parent = document.querySelector(parentSelector);
+         this.element = document.querySelector(`.${this.cssClass}`);
          this.renderBurger();
-         this.burgerAni();
-         this.switchTo2(mainBtn, secondPageBtn);
-         this.switchTo1();
-
-
+         this.burgerDoStartAni();
+         this.switchTo2Page(mainBtn, secondPageBtn);
+         this.switchTo1Page();
       }
 
+      burgerPosition(element, top, left, width, height, zIndex, rotate, scale) {
+         element.style.cssText = `
+         top: ${top}%;
+         left: ${left}%;
+         width: ${width}%;
+         height: ${height}px;
+         z-index: ${zIndex};
+         transform: translate(-50%, -50%) rotate(${rotate}deg) scaleX(${scale});
+         background-size: 90%;
+         background-position: center;
+         background-repeat: no-repeat;
+         display: block;
+         position: absolute;
+         `;
+      }
+
+   
       renderBurger() {
          const item = document.createElement("div");
          item.innerHTML = `
                <div></div>
             `;
-
          this.parent.append(item);
          item.classList.add(`${this.cssClass}`);
-
-         item.style.cssText = `
-            top: ${this.topA}%;
-            left: ${this.leftA}%;
-            width: ${this.widthA}%;
-            height: ${this.height}px;
-            z-index: ${this.zIndexA};
-            transform: translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale});
-            background-size: 90%;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: block;
-            position: absolute;
-         `;
+         this.burgerPosition(item, this.topA, this.leftA, this.widthA, 
+            this.height, this.zIndex, this.rotate, this.scale);
       }
-
-      startAniPart2() {
+      
+      burgerDoOpening() {
          document.querySelector(`.${this.cssClass}`).animate([{
                top: `${this.topA}%`,
                left: `${this.leftA}%`,
@@ -148,62 +153,92 @@ window.addEventListener("DOMContentLoaded", () => {
                zIndex: `${this.zIndex}`
             }
          ], {
-            duration: 1000,
+            duration: this.duration,
             easing: "ease",
          });
       }
 
+      burgerDoFolding() {
+         document.querySelector(`.${this.cssClass}`).animate([{
+            top: `${this.top - 5}%`,
+            left: `${this.left}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale}`,
+            width: `${this.width + 2}%`,
+            zIndex: `${this.zIndex}`
+         },
+         {  
+            top: `${this.topA}%`,
+            left: `${this.leftA}%`,
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`,
+            zIndex: `${this.zIndexA}`
+            
+         }
+      ], {
+         duration: this.duration,
+         easing: "ease",
+      });
+      }
 
-      burgerAni() {
-         setTimeout(() => {
-            document.querySelector(`.${this.cssClass}`).animate([{
-                  top: `${this.topA}%`,
-                  left: `${this.leftA}%`,
+
+      burgerDoStartAni() {
+            let defaultOtherParam  = {
                   transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
                   width: `${this.widthA}%`,
                   zIndex: `${this.zIndexA}`
+            };
+
+            let {transform, width, zIndex} = defaultOtherParam;
+
+            document.querySelector(`.${this.cssClass}`).animate([
+               {
+                  top: `${this.topA}%`,
+                  left: `${this.leftA}%`,
+                  transform: transform,
+                  width: width,
+                  zIndex: zIndex,
                },
                {
                   top: `${this.topA + 1}%`,
                   left: `${this.leftA + 1}%`,
-                  transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                  width: `${this.widthA}%`,
-                  zIndex: `${this.zIndexA}`
+                  transform: transform,
+                  width: width,
+                  zIndex: zIndex,
                },
                {
                   top: `${this.topA - 1}%`,
                   left: `${this.leftA - 1}%`,
-                  transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                  width: `${this.widthA}%`,
-                  zIndex: `${this.zIndexA}`
+                  transform: transform,
+                  width: width,
+                  zIndex: zIndex,
                },
                {
                   top: `${this.topA}%`,
                   left: `${this.leftA}%`,
-                  transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                  width: `${this.widthA}%`,
-                  zIndex: `${this.zIndexA}`
+                  transform: transform,
+                  width: width,
+                  zIndex: zIndex,
                },
                {
                   top: `${this.topA - 1}%`,
                   left: `${this.leftA + 1}%`,
-                  transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                  width: `${this.widthA}%`,
-                  zIndex: `${this.zIndexA}`
+                  transform: transform,
+                  width: width,
+                  zIndex: zIndex,
                },
                {
                   top: `${this.topA + 1}%`,
                   left: `${this.leftA - 1}%`,
-                  transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                  width: `${this.widthA}%`,
-                  zIndex: `${this.zIndexA}`
+                  transform: transform,
+                  width: width,
+                  zIndex: zIndex,
                },
                {
                   top: `${this.topA}%`,
                   left: `${this.leftA}%`,
-                  transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                  width: `${this.widthA}%`,
-                  zIndex: `${this.zIndexA}`
+                  transform: transform,
+                  width: width,
+                  zIndex: zIndex,
                },
             ], {
                duration: 700,
@@ -213,68 +248,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
             Promise.all(
                document.querySelector(`.${this.cssClass}`).getAnimations().map(
-                  function (startAniPart1) {
-                     return startAniPart1.finished;
+                  function (burgerDoStartAni) {
+                     return burgerDoStartAni.finished;
                   }
                )
             ).then(() => {
-               this.startAniPart2();
+               this.burgerDoOpening();
             });
 
-            document.querySelector(`.${this.cssClass}`).style.cssText = `
-                  top: ${this.top - 5}%;
-                  left: ${this.left}%;
-                  width: ${this.width + 2}%;
-                  height: ${this.height}px;
-                  z-index: ${this.zIndex};
-                  transform: translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale});
-                  background-size: 90%;
-                  background-position: center;
-                  background-repeat: no-repeat;
-                  display: block;
-                  position: absolute;
-               `;
-         }, 3000);
-
-
+            this.burgerPosition(document.querySelector(`.${this.cssClass}`), (this.top - 5), this.left, 
+               (this.width + 2), this.height, this.zIndex, this.rotate, this.scale);
+            
       }
 
-      switchTo2(btn1, btn2) {
+      switchTo2Page(btn1, btn2) {
          let arr = [];
          arr.push(btn1, btn2);
          arr.forEach(e => {
             e.addEventListener("click", () => {
-               let burgerFolding = document.querySelector(`.${this.cssClass}`).animate([{
-                     top: `${this.top - 5}%`,
-                     left: `${this.left}%`,
-                     transform: `translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale}`,
-                     width: `${this.width + 2}%`,
-                     zIndex: `${this.zIndex}`
-                  },
-                  {
-                     top: `${this.topA}%`,
-                     left: `${this.leftA}%`,
-                     transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                     width: `${this.widthA}%`,
-                     zIndex: `${this.zIndexA}`
-                  },
-               ], {
-                  duration: 1000,
-                  easing: "ease",
-               });
-               document.querySelector(`.${this.cssClass}`).style.cssText = `
-                  top: ${this.topA}%;
-                  left: ${this.leftA}%;
-                  width: ${this.widthA}%;
-                  height: ${this.height}px;
-                  z-index: ${this.zIndexA};
-                  transform: translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale});
-                  background-size: 90%;
-                  background-position: center;
-                  background-repeat: no-repeat;
-                  display: block;
-                  position: absolute;
-               `;
+               let burgerFolding = this.burgerDoFolding();
 
                Promise.all(
                   document.querySelector(`.${this.cssClass}`).getAnimations().map(
@@ -283,65 +275,24 @@ window.addEventListener("DOMContentLoaded", () => {
                      }
                   )
                ).then(() => {
-                  swipeToSecondPage();
-                 
-               });
+                  this.burgerPosition(document.querySelector(`.${this.cssClass}`), this.topA, this.leftA,
+                  this.widthA, this.height, this.zIndexA, this.rotateA, this.scale);
 
-               
+               }).then(() => {
+                  setTimeout(() => {
+                     swipeToSecondPage();
+                  }, 300);
+               });
             });
          });
 
       }
 
-      switchTo1() {
+      switchTo1Page() {
          firstPageBtn.addEventListener("click", () => {
             swipeToFirstPage();
-            setTimeout(() => {
-               let burgerOpening = document.querySelector(`.${this.cssClass}`).animate([{
-                  top: `${this.topA}%`,
-                  left: `${this.leftA}%`,
-                  transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                  width: `${this.widthA}%`,
-                  zIndex: `${this.zIndexA}`
-                  
-               },
-               {
-                  top: `${this.top - 5}%`,
-                  left: `${this.left}%`,
-                  transform: `translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale}`,
-                  width: `${this.width + 2}%`,
-                  zIndex: `${this.zIndex}`
-               },
-            ], {
-               duration: 1000,
-               easing: "ease",
-            });
-
-            Promise.all(
-               document.querySelector(`.${this.cssClass}`).getAnimations().map(
-                  function (burgerOpening) {
-                     return burgerOpening.finished;
-                  }
-               )
-            ).then(() => {
-               document.querySelector(`.${this.cssClass}`).style.cssText = `
-               top: ${this.top - 5}%;
-               left: ${this.left}%;
-               width: ${this.width + 2}%;
-               height: ${this.height}px;
-               z-index: ${this.zIndex};
-               transform: translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale});
-               background-size: 90%;
-               background-position: center;
-               background-repeat: no-repeat;
-               display: block;
-               position: absolute;
-            `;
-              
-            });
-
             
-            }, 2000);
+            
             
          });
       }
@@ -369,6 +320,7 @@ window.addEventListener("DOMContentLoaded", () => {
       30,
       0,
       1,
+      1500,
       ".burger",
    );
 
@@ -392,6 +344,7 @@ window.addEventListener("DOMContentLoaded", () => {
       25,
       0,
       1,
+      1200,
       ".burger",
    );
    new burgerItem(
@@ -414,6 +367,7 @@ window.addEventListener("DOMContentLoaded", () => {
       30,
       0,
       -1,
+      1500,
       ".burger",
    );
    new burgerItem(
@@ -436,6 +390,7 @@ window.addEventListener("DOMContentLoaded", () => {
       20,
       0,
       1,
+      1300,
       ".burger",
    );
    new burgerItem(
@@ -458,6 +413,7 @@ window.addEventListener("DOMContentLoaded", () => {
       30,
       0,
       1,
+      1300,
       ".burger",
    );
    new burgerItem(
@@ -480,6 +436,7 @@ window.addEventListener("DOMContentLoaded", () => {
       -10,
       0,
       1,
+      1100,
       ".burger",
    );
 
@@ -489,7 +446,7 @@ window.addEventListener("DOMContentLoaded", () => {
       36,
       45,
       // left
-      74,
+      72,
       70,
       // width
       15,
@@ -503,6 +460,7 @@ window.addEventListener("DOMContentLoaded", () => {
       40,
       0,
       1,
+      1000,
       ".burger",
    );
 
@@ -526,6 +484,7 @@ window.addEventListener("DOMContentLoaded", () => {
       18,
       0,
       1,
+      1200,
       ".burger",
    );
 
@@ -549,6 +508,7 @@ window.addEventListener("DOMContentLoaded", () => {
       10,
       0,
       1,
+      1000,
       ".burger",
    );
 
@@ -572,6 +532,7 @@ window.addEventListener("DOMContentLoaded", () => {
       -18,
       0,
       1,
+      1300,
       ".burger",
    );
 
@@ -595,6 +556,7 @@ window.addEventListener("DOMContentLoaded", () => {
       45,
       0,
       1,
+      1500,
       ".burger",
    );
 
@@ -618,6 +580,7 @@ window.addEventListener("DOMContentLoaded", () => {
       -8,
       0,
       1,
+      1500,
       ".burger",
    );
 
@@ -642,6 +605,7 @@ window.addEventListener("DOMContentLoaded", () => {
       25,
       0,
       1,
+      1400,
       ".burger",
    );
 
@@ -652,7 +616,7 @@ window.addEventListener("DOMContentLoaded", () => {
       67,
       // left
       68,
-      60,
+      59,
       // width
       8,
       16,
@@ -665,6 +629,7 @@ window.addEventListener("DOMContentLoaded", () => {
       18,
       0,
       1,
+      500,
       ".burger",
    );
 
@@ -688,6 +653,7 @@ window.addEventListener("DOMContentLoaded", () => {
       -30,
       0,
       1,
+      500,
       ".burger",
    );
 
@@ -711,6 +677,7 @@ window.addEventListener("DOMContentLoaded", () => {
       16,
       0,
       1,
+      800,
       ".burger",
    );
 
@@ -734,6 +701,7 @@ window.addEventListener("DOMContentLoaded", () => {
       -20,
       0,
       1,
+      800,
       ".burger",
    );
 
@@ -757,6 +725,7 @@ window.addEventListener("DOMContentLoaded", () => {
       20,
       0,
       1,
+      800,
       ".burger",
    );
 
@@ -780,6 +749,7 @@ window.addEventListener("DOMContentLoaded", () => {
       -16,
       0,
       1,
+      1200,
       ".burger",
    );
 
@@ -803,6 +773,7 @@ window.addEventListener("DOMContentLoaded", () => {
       0,
       0,
       1,
+      1200,
       ".burger",
    );
 
@@ -820,12 +791,13 @@ window.addEventListener("DOMContentLoaded", () => {
       // height
       100,
       // zIndex
-      3,
+      2,
       2,
       // rotate
       -10,
       0,
       1,
+      1500,
       ".burger",
    );
 
@@ -843,12 +815,109 @@ window.addEventListener("DOMContentLoaded", () => {
       // height
       120,
       // zIndex
-      2,
+      1,
       1,
       // rotate
       -12,
       0,
       1,
+      1500,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__emo-1",
+      // top
+      110,
+      60,
+      // left
+      30,
+      58,
+      // width
+      5,
+      7,
+      // height
+      70,
+      // zIndex
+      1,
+      1,
+      // rotate
+      1,
+      27,
+      1,
+      1700,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__emo-2",
+      // top
+      77,
+      60,
+      // left
+      82,
+      58,
+      // width
+      3,
+      5,
+      // height
+      70,
+      // zIndex
+      1,
+      1,
+      // rotate
+      1,
+      27,
+      1,
+      1700,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__emo-3",
+      // top
+      47,
+      60,
+      // left
+      78,
+      58,
+      // width
+      5,
+      7,
+      // height
+      70,
+      // zIndex
+      1,
+      1,
+      // rotate
+      1,
+      27,
+      1,
+      1700,
+      ".burger",
+   );
+
+   new burgerItem(
+      "burger__emo-4",
+      // top
+      47,
+      60,
+      // left
+      26,
+      58,
+      // width
+      3,
+      5,
+      // height
+      40,
+      // zIndex
+      1,
+      1,
+      // rotate
+      1,
+      27,
+      1,
+      1700,
       ".burger",
    );
 
