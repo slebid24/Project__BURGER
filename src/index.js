@@ -289,12 +289,16 @@ window.addEventListener("DOMContentLoaded", () => {
       }
 
       switchTo1Page() {
-         firstPageBtn.addEventListener("click", () => {
-            swipeToFirstPage();
+          
+            firstPageBtn.addEventListener("click", () => {
+               
             
-            
-            
-         });
+               swipeToFirstPage();
+               this.burgerDoOpening();
+          
+         
+         },);
+         
       }
 
 
