@@ -1,0 +1,235 @@
+.modal{
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 1050;
+   display: block;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+   background-color: rgba(82, 67, 194, .9);
+   
+
+   &__dialog{
+      width: 600px;
+      margin-left: -300px;
+      height: 300px;
+      margin-top: -180px;
+      position:absolute; 
+      top:50%;
+      left: 50%;
+   }
+
+   &__content{
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+      background-color: #fff;
+      border-radius: 20px;
+   }
+
+   &__form{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+   }
+
+   &__topside{
+      display: flex;
+      justify-content: space-between;
+   }
+
+   &__title{
+      font-family: OpenSans-SemiBold;
+      color: #1F2939;
+      font-size: 20px;
+      line-height: 27px;
+      padding-left: 22px;
+      
+
+      &::before{
+         content: url(/src/images/focus-line.svg);
+         position: absolute;
+         top: 5.6%;
+         left: 2%;
+
+      }
+   }
+
+   &__closex{
+      @include reset-button;
+      &::after{
+         content: url(/src/images/close.svg);
+         position: absolute;
+         top: 6%;
+         left: 95%;
+      }
+   }
+
+   &__midside{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      height: 120px;
+   }
+
+   &__name{
+      width: 280px;
+      height: 52px;
+      border: 2px solid #F5F5FF;
+      border-radius: 15px;
+      position: relative;
+
+      &::after{
+         background-image: url(/src/images/name.svg);
+         background-repeat: no-repeat;
+         background-size: 25px 25px;
+         display: inline-block;
+         width: 30px; 
+         height: 30px;
+         content:"";
+         position: absolute;
+         top: 13px;
+         left: 12px;
+      }
+   }
+
+   &__name-text{
+      font-family: OpenSans-Regular;
+      color: #949BA6;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      position: absolute;
+      top: -7px;
+      left: 44px;
+      
+   }
+
+   &__name-input{
+      position: absolute;
+      top: 20px;
+      left: 44px;
+      border:none;
+      background:none;
+      outline:none;
+      padding:0;
+   }
+
+   &__number{
+      width: 280px;
+      height: 52px;
+      border: 2px solid #F5F5FF;
+      border-radius: 15px;
+      position: relative;
+      
+      &::after{
+         background-image: url(/src/images/phone-fill.svg);
+         background-repeat: no-repeat;
+         background-size: 25px 25px;
+         display: inline-block;
+         width: 30px; 
+         height: 30px;
+         content:"";
+         position: absolute;
+         top: 13px;
+         left: 12px;
+      }
+   }
+
+   &__number-text{
+      font-family: OpenSans-Regular;
+      color: #949BA6;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      position: absolute;
+      top: -7px;
+      left: 44px;
+   }
+
+   &__number-input{
+      position: absolute;
+      top: 20px;
+      left: 44px;
+      border:none;
+      background:none;
+      outline:none;
+      padding:0;
+   }
+
+   &__address{
+      width: 280px;
+      height: 52px;
+      border: 2px solid #F5F5FF;
+      border-radius: 15px;
+      position: relative;
+
+      &::after{
+         background-image: url(/src/images/way.svg);
+         background-repeat: no-repeat;
+         background-size: 25px 25px;
+         display: inline-block;
+         width: 30px; 
+         height: 36px;
+         content:"";
+         position: absolute;
+         top: 13px;
+         left: 12px;
+      }
+   }
+
+   &__address-text{
+      font-family: OpenSans-Regular;
+      color: #949BA6;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      position: absolute;
+      top: -7px;
+      left: 44px;
+   }
+
+   &__address-input{
+      position: absolute;
+      top: 20px;
+      left: 44px;
+      border:none;
+      background:none;
+      outline:none;
+      padding:0;
+   }
+
+   &__time{
+      width: 280px;
+      height: 52px;
+      border: 2px solid #F5F5FF;
+      border-radius: 15px;
+      position: relative;
+   }
+
+   &__time-text{
+      font-family: OpenSans-Regular;
+      color: #949BA6;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      position: absolute;
+      top: -7px;
+      left: 44px;
+   }
+
+   &__time-input{
+      position: absolute;
+      top: 20px;
+      left: 44px;
+      border:none;
+      background:none;
+      outline:none;
+      padding:0;
+   }
+
+
+}
