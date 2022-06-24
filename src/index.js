@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
    const width = wrapper.offsetWidth;
    const widthAfterSwipe = page1.offsetWidth;
    let offset = 0;
-   
+
    field.style.width = width * pages.length + "px";
    page2.style.width = width + "px";
    field.style.display = "flex";
@@ -59,6 +59,7 @@ window.addEventListener("DOMContentLoaded", () => {
          setTimeout(() => {
             setTimeout(() => {
                e.style.opacity = 1;
+               e.classList.add("showed");
             }, timing);
          }, 250);
       });
@@ -83,6 +84,31 @@ window.addEventListener("DOMContentLoaded", () => {
    }
 
    
+   firstPageBtn.addEventListener("click", () => {
+     if (document.querySelectorAll(".main__ingradient")[7].classList.contains("showed")) {
+      swipeToFirstPage();
+      document.querySelectorAll(".main__ingradient").forEach(e => {
+         e.classList.remove("showed");
+      });
+     }
+   });
+
+   function doSwitch(btn1, btn2){
+      let arr = [];
+      arr.push(btn1, btn2);
+      arr.forEach(e => {
+         e.addEventListener("click", () => {
+            setTimeout(() => {
+               swipeToSecondPage();
+            }, 1000);
+         });
+      });
+   }
+
+   doSwitch(mainBtn, secondPageBtn);
+
+
+
 
    class burgerItem {
       constructor(cssClass, top, topA, left, leftA, width, widthA,
@@ -102,7 +128,6 @@ window.addEventListener("DOMContentLoaded", () => {
          this.scale = scale;
          this.duration = duration;
          this.parent = document.querySelector(parentSelector);
-         this.element = document.querySelector(`.${this.cssClass}`);
          this.renderBurger();
          this.burgerDoStartAni();
          this.switchTo2Page(mainBtn, secondPageBtn);
@@ -125,7 +150,7 @@ window.addEventListener("DOMContentLoaded", () => {
          `;
       }
 
-   
+
       renderBurger() {
          const item = document.createElement("div");
          item.innerHTML = `
@@ -133,10 +158,10 @@ window.addEventListener("DOMContentLoaded", () => {
             `;
          this.parent.append(item);
          item.classList.add(`${this.cssClass}`);
-         this.burgerPosition(item, this.topA, this.leftA, this.widthA, 
+         this.burgerPosition(item, this.topA, this.leftA, this.widthA,
             this.height, this.zIndex, this.rotate, this.scale);
       }
-      
+
       burgerDoOpening() {
          document.querySelector(`.${this.cssClass}`).animate([{
                top: `${this.topA}%`,
@@ -156,109 +181,127 @@ window.addEventListener("DOMContentLoaded", () => {
             duration: this.duration,
             easing: "ease",
          });
+
+         if (document.querySelector(`.${this.cssClass}`).classList.contains("closed")) {
+            document.querySelector(`.${this.cssClass}`).classList.remove("closed");
+            document.querySelector(`.${this.cssClass}`).classList.add("opened");
+         } else {
+            document.querySelector(`.${this.cssClass}`).classList.add("opened");
+         }
+
       }
 
       burgerDoFolding() {
          document.querySelector(`.${this.cssClass}`).animate([{
-            top: `${this.top - 5}%`,
-            left: `${this.left}%`,
-            transform: `translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale}`,
-            width: `${this.width + 2}%`,
-            zIndex: `${this.zIndex}`
-         },
-         {  
-            top: `${this.topA}%`,
-            left: `${this.leftA}%`,
-            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-            width: `${this.widthA}%`,
-            zIndex: `${this.zIndexA}`
-            
+               top: `${this.top - 5}%`,
+               left: `${this.left}%`,
+               transform: `translate(-50%, -50%) rotate(${this.rotate}deg) scaleX(${this.scale}`,
+               width: `${this.width + 2}%`,
+               zIndex: `${this.zIndex}`
+            },
+            {
+               top: `${this.topA}%`,
+               left: `${this.leftA}%`,
+               transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+               width: `${this.widthA}%`,
+               zIndex: `${this.zIndexA}`
+
+            }
+         ], {
+            duration: this.duration,
+            easing: "ease",
+         });
+
+         if (document.querySelector(`.${this.cssClass}`).classList.contains("opened")) {
+            document.querySelector(`.${this.cssClass}`).classList.remove("opened");
+            document.querySelector(`.${this.cssClass}`).classList.add("closed");
+         } else {
+            document.querySelector(`.${this.cssClass}`).classList.add("closed");
          }
-      ], {
-         duration: this.duration,
-         easing: "ease",
-      });
       }
 
 
       burgerDoStartAni() {
-            let defaultOtherParam  = {
-                  transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
-                  width: `${this.widthA}%`,
-                  zIndex: `${this.zIndexA}`
-            };
+         let defaultOtherParam = {
+            transform: `translate(-50%, -50%) rotate(${this.rotateA}deg) scaleX(${this.scale}`,
+            width: `${this.widthA}%`,
+            zIndex: `${this.zIndexA}`
+         };
 
-            let {transform, width, zIndex} = defaultOtherParam;
+         let {
+            transform,
+            width,
+            zIndex
+         } = defaultOtherParam;
 
-            document.querySelector(`.${this.cssClass}`).animate([
-               {
-                  top: `${this.topA}%`,
-                  left: `${this.leftA}%`,
-                  transform: transform,
-                  width: width,
-                  zIndex: zIndex,
-               },
-               {
-                  top: `${this.topA + 1}%`,
-                  left: `${this.leftA + 1}%`,
-                  transform: transform,
-                  width: width,
-                  zIndex: zIndex,
-               },
-               {
-                  top: `${this.topA - 1}%`,
-                  left: `${this.leftA - 1}%`,
-                  transform: transform,
-                  width: width,
-                  zIndex: zIndex,
-               },
-               {
-                  top: `${this.topA}%`,
-                  left: `${this.leftA}%`,
-                  transform: transform,
-                  width: width,
-                  zIndex: zIndex,
-               },
-               {
-                  top: `${this.topA - 1}%`,
-                  left: `${this.leftA + 1}%`,
-                  transform: transform,
-                  width: width,
-                  zIndex: zIndex,
-               },
-               {
-                  top: `${this.topA + 1}%`,
-                  left: `${this.leftA - 1}%`,
-                  transform: transform,
-                  width: width,
-                  zIndex: zIndex,
-               },
-               {
-                  top: `${this.topA}%`,
-                  left: `${this.leftA}%`,
-                  transform: transform,
-                  width: width,
-                  zIndex: zIndex,
-               },
-            ], {
-               duration: 700,
-               iterations: 2,
-               easing: "linear",
-            });
+         document.querySelector(`.${this.cssClass}`).animate([{
+               top: `${this.topA}%`,
+               left: `${this.leftA}%`,
+               transform: transform,
+               width: width,
+               zIndex: zIndex,
+            },
+            {
+               top: `${this.topA + 1}%`,
+               left: `${this.leftA + 1}%`,
+               transform: transform,
+               width: width,
+               zIndex: zIndex,
+            },
+            {
+               top: `${this.topA - 1}%`,
+               left: `${this.leftA - 1}%`,
+               transform: transform,
+               width: width,
+               zIndex: zIndex,
+            },
+            {
+               top: `${this.topA}%`,
+               left: `${this.leftA}%`,
+               transform: transform,
+               width: width,
+               zIndex: zIndex,
+            },
+            {
+               top: `${this.topA - 1}%`,
+               left: `${this.leftA + 1}%`,
+               transform: transform,
+               width: width,
+               zIndex: zIndex,
+            },
+            {
+               top: `${this.topA + 1}%`,
+               left: `${this.leftA - 1}%`,
+               transform: transform,
+               width: width,
+               zIndex: zIndex,
+            },
+            {
+               top: `${this.topA}%`,
+               left: `${this.leftA}%`,
+               transform: transform,
+               width: width,
+               zIndex: zIndex,
+            },
+         ], {
+            duration: 700,
+            iterations: 2,
+            easing: "linear",
+         });
 
-            Promise.all(
-               document.querySelector(`.${this.cssClass}`).getAnimations().map(
-                  function (burgerDoStartAni) {
-                     return burgerDoStartAni.finished;
-                  }
-               )
-            ).then(() => {
-               this.burgerDoOpening();
-            });
+         Promise.all(
+            document.querySelector(`.${this.cssClass}`).getAnimations().map(
+               function (burgerDoStartAni) {
+                  return burgerDoStartAni.finished;
+               }
+            )
+         ).then(() => {
+            this.burgerDoOpening();
+         });
 
-            this.burgerPosition(document.querySelector(`.${this.cssClass}`), (this.top - 5), this.left, 
-               (this.width + 2), this.height, this.zIndex, this.rotate, this.scale);
-            
+         this.burgerPosition(document.querySelector(`.${this.cssClass}`), (this.top - 5), this.left,
+            (this.width + 2), this.height, this.zIndex, this.rotate, this.scale);
+
       }
 
       switchTo2Page(btn1, btn2) {
@@ -266,6 +309,7 @@ window.addEventListener("DOMContentLoaded", () => {
          arr.push(btn1, btn2);
          arr.forEach(e => {
             e.addEventListener("click", () => {
+              if (document.querySelector(`.${this.cssClass}`).classList.contains("opened")) {
                let burgerFolding = this.burgerDoFolding();
 
                Promise.all(
@@ -276,32 +320,35 @@ window.addEventListener("DOMContentLoaded", () => {
                   )
                ).then(() => {
                   this.burgerPosition(document.querySelector(`.${this.cssClass}`), this.topA, this.leftA,
-                  this.widthA, this.height, this.zIndexA, this.rotateA, this.scale);
+                     this.widthA, this.height, this.zIndexA, this.rotateA, this.scale);
 
-               }).then(() => {
-                  setTimeout(() => {
-                     swipeToSecondPage();
-                  }, 300);
                });
+              }
             });
          });
 
       }
 
       switchTo1Page() {
-          
-            firstPageBtn.addEventListener("click", () => {
-               
-            
-               swipeToFirstPage();
-               this.burgerDoOpening();
-          
-         
-         },);
-         
+
+         firstPageBtn.addEventListener("click", () => {
+            if (document.querySelector(`.${this.cssClass}`).classList.contains("closed")) {
+               let burgerOpening = this.burgerDoOpening();
+
+               Promise.all(
+                  document.querySelector(`.${this.cssClass}`).getAnimations().map(
+                     function (burgerOpening) {
+                        return burgerOpening.finished;
+                     }
+                  )
+               ).then(() => {
+                  this.burgerPosition(document.querySelector(`.${this.cssClass}`), (this.top - 5), this.left,
+                     (this.width + 2), this.height, this.zIndex, this.rotate, this.scale);
+               });
+            }
+         });
+
       }
-
-
    }
 
    new burgerItem(
@@ -927,12 +974,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
    // Ефект меню
    topBtns.forEach((elem) => {
-
       elem.onmouseenter =
          elem.onmouseleave = (e) => {
-
             const tolerance = 10;
-
             const left = 0;
             const right = elem.clientWidth;
 
@@ -946,7 +990,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
 
             elem.style.setProperty('--x', `${ x }px`);
-
          };
    });
    // 2 page
@@ -980,7 +1023,8 @@ window.addEventListener("DOMContentLoaded", () => {
    };
 
    class Ingradiet {
-      constructor(src, conImg, alt, title, price, time, oz, kcal, parentSelector, obj, imgKey, btnIdM, btnIdP, countId, startMargin, pathMargin) {
+      constructor(src, conImg, alt, title, price, time, oz, kcal, parentSelector,
+         obj, imgKey, btnIdM, btnIdP, countId, startMargin, pathMargin) {
          this.src = src;
          this.conImg = conImg;
          this.alt = alt;
@@ -1038,32 +1082,26 @@ window.addEventListener("DOMContentLoaded", () => {
          document.querySelector(`#${this.btnIdP}`).addEventListener("click", () => {
             setTimeout(() => {
                if (n < 10) {
-                  // лічильник
                   document.querySelector(`#${this.countId}`).innerHTML = ++n;
                   let parentSelectorBur = document.querySelector(".main__const-inner");
 
-
-                  // додавання класу в масив
                   this.imgKey.push(this.conImg);
                   this.obj.num.push(this.title);
                   let lenghthOfArr = this.obj.num.length;
 
-
-
-                  // створення елемента і привласнення йому класу з масива
                   let newItem = document.createElement("div");
                   newItem.classList.add(this.imgKey[this.imgKey.length - 1]);
                   newItem.classList.add("for_comparison");
                   newItem.classList.add("for_start_ani");
 
-                  // Пуш значення відступу в масив
+
                   this.pathMargin.push(this.startMargin);
-                  // сума всіх відступів
                   let concatArr = generalObj.margin.cutletMar
-                     .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar, generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar, generalObj.margin.bunMar);
+                     .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar,
+                        generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar,
+                        generalObj.margin.bunMar);
                   concatArr.unshift(0);
                   let marginFin = concatArr.reduce((sum, current) => sum + current);
-                  // привласнення сумми всіх відступів останньому створеному елементу
                   newItem.style = `top: ${marginFin}%`;
                   parentSelectorBur.append(newItem);
 
@@ -1089,7 +1127,6 @@ window.addEventListener("DOMContentLoaded", () => {
                            transform: "skew(0)",
                            top: `${parseInt(marginFin) - 90}%`,
                            left: "0%"
-
                         },
                         {
                            transform: "skew(-5deg, 5deg)",
@@ -1107,15 +1144,6 @@ window.addEventListener("DOMContentLoaded", () => {
                      });
                   }
                   document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
-
-                  console.log(marginFin)
-
-
-
-                  if (n == 9) {
-                     document.querySelector(".main__ingradient").style.backgroundColor = "#fff";
-                  }
-
 
 
                   this.obj.sum.push(this.price);
@@ -1153,24 +1181,19 @@ window.addEventListener("DOMContentLoaded", () => {
                if (n > 0) {
                   document.querySelector(`#${this.countId}`).innerHTML = --n;
 
-                  // видалення класу імг з масива 
                   let deleted = this.imgKey.pop(this.conImg);
 
-
-                  // видалення з масива значення останнього відступа
                   let deletedM = this.pathMargin.pop(this.startMargin);
 
-
-                  // винесення в масив всіх елементів з класом екземпляра
                   let a = "." + this.conImg;
                   let arr = document.querySelectorAll(a);
-                  // привласнення в перемінну значення встановленного відступу видаляйомого елемента
+
                   let comparDefin = arr[arr.length - 1].style.top;
                   console.log(arr.length - 1);
-                  let classForDelAni = (((this.obj.num.length - 1) % 2) === 0) ? "for_del_ani_left" : "for_del_ani_right";
+                  let classForDelAni = (((this.obj.num.length - 1) % 2) === 0) ? "for_del_ani_left" :
+                     "for_del_ani_right";
                   arr[arr.length - 1].classList.replace("for_start_ani", classForDelAni);
 
-                  // видалення останнього елемента екземпляра
                   setTimeout(() => {
                      arr[arr.length - 1].remove();
                   }, 100);
@@ -1181,13 +1204,14 @@ window.addEventListener("DOMContentLoaded", () => {
                      return parseInt(e.style.top) < parseInt(comparDefin);
                   });
 
-
                   toChange.forEach((e) => {
                      e.style.top = `${parseInt(e.style.top) - parseInt(deletedM)}%`;
                   });
 
                   let concatArr = generalObj.margin.cutletMar
-                     .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar, generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar, generalObj.margin.bunMar);
+                     .concat(generalObj.margin.mayoMar, generalObj.margin.cucumberMar, generalObj.margin.cheeseMar,
+                        generalObj.margin.tomatoMar, generalObj.margin.saladMar, generalObj.margin.onionMar,
+                        generalObj.margin.bunMar);
                   concatArr.unshift(0);
                   let marginFin = concatArr.reduce((sum, current) => sum + current);
 
@@ -1200,7 +1224,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
                   let deletedNun = this.obj.num.pop(this.num);
                   let lenghthOfArr = this.obj.num.length;
-
 
                   if (lenghthOfArr == 0) {
                      let deleteBun = document.querySelector(".item__topbun").animate([{
@@ -1227,9 +1250,6 @@ window.addEventListener("DOMContentLoaded", () => {
                      });
                   }
 
-
-                  console.log(lenghthOfArr)
-
                   let deletedSum = this.obj.sum.pop(this.price);
                   let num = this.obj.sum;
                   let sumprice = num.reduce((sum, current) => sum + current);
@@ -1250,19 +1270,13 @@ window.addEventListener("DOMContentLoaded", () => {
                   let sumKcal = numKcal.reduce((sum, current) => sum + current);
                   document.querySelector(".main__kcal").innerHTML = `${sumKcal} kcal`;
 
-
-
                } else {
                   return;
                }
             }, 200);
          });
       }
-
-
    }
-
-
 
    let cutletIn = new Ingradiet(
       cutlet,
