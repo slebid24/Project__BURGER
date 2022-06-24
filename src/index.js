@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
    const mainBtn = document.querySelector(".main__btn");
    const topBtns = document.querySelectorAll(".header__page-changer");
 
-   const width = wrapper.offsetWidth;
+   const width = (wrapper.offsetWidth - 20);
    const widthAfterSwipe = page1.offsetWidth;
    let offset = 0;
 

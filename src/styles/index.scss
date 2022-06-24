@@ -5,7 +5,7 @@
 @import "footer.scss";
 @import "burger.scss";
 @import "constrBgImg.scss";
-@import "productCards.scss";
+@import "modal.scss";
 
 *,
 *::before,
@@ -16,6 +16,8 @@
 img {
    max-width: 100%;
 }
+
+
 
 .container {
    max-width: 1544px;
@@ -29,7 +31,10 @@ img {
    display: flex;
    flex-direction: column;
    justify-content: space-between;
+   // filter: blur(3px);
 }
+
+
 
 
  
