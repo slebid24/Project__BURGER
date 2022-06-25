@@ -103,19 +103,22 @@
       font-size: 12px;
       line-height: 16px;
       position: absolute;
-      top: -7px;
+      top: 7px;
       left: 44px;
       
    }
 
    &__name-input{
       position: absolute;
-      top: 20px;
+      top: 25px;
       left: 44px;
       border:none;
       background:none;
       outline:none;
       padding:0;
+      font-family: OpenSans-SemiBold;
+      font-size: 14px;
+      color: #1F2939;
    }
 
    &__number{
@@ -146,18 +149,21 @@
       font-size: 12px;
       line-height: 16px;
       position: absolute;
-      top: -7px;
+      top: 7px;
       left: 44px;
    }
 
    &__number-input{
       position: absolute;
-      top: 20px;
+      top: 25px;
       left: 44px;
       border:none;
       background:none;
       outline:none;
       padding:0;
+      font-family: OpenSans-SemiBold;
+      font-size: 14px;
+      color: #1F2939;
    }
 
    &__address{
@@ -168,12 +174,12 @@
       position: relative;
 
       &::after{
-         background-image: url(/src/images/way.svg);
+         background-image: url(/src/images/route-line.svg);
          background-repeat: no-repeat;
          background-size: 25px 25px;
          display: inline-block;
          width: 30px; 
-         height: 36px;
+         height: 30px;
          content:"";
          position: absolute;
          top: 13px;
@@ -188,18 +194,21 @@
       font-size: 12px;
       line-height: 16px;
       position: absolute;
-      top: -7px;
+      top: 7px;
       left: 44px;
    }
 
    &__address-input{
       position: absolute;
-      top: 20px;
+      top: 25px;
       left: 44px;
       border:none;
       background:none;
       outline:none;
       padding:0;
+      font-family: OpenSans-SemiBold;
+      font-size: 14px;
+      color: #1F2939;
    }
 
    &__time{
@@ -217,19 +226,57 @@
       font-size: 12px;
       line-height: 16px;
       position: absolute;
-      top: -7px;
+      top: 7px;
       left: 44px;
    }
 
    &__time-input{
       position: absolute;
-      top: 20px;
+      top: 25px;
       left: 44px;
       border:none;
       background:none;
       outline:none;
       padding:0;
+      font-family: OpenSans-SemiBold;
+      font-size: 14px;
+      color: #1F2939;
    }
 
+   &__botside{
+      display: flex;
+      justify-content: flex-end;
+   }
+
+   &__cancel{
+      width: 120px;
+      height: 52px;
+      margin-right: 16px;
+      @include reset-button;
+      font-family: OpenSans-SemiBold;
+      background-color: #F5F5FF;
+      border-radius: 30px;
+      transition: 0.2s linear;
+      
+   }
+
+   &__cancel:hover{
+      background-color: #FFC8C8;
+   }
+
+   &__sub{
+      width: 120px;
+      height: 52px;
+      @include reset-button;
+      font-family: OpenSans-SemiBold;
+      color: #F5F5FF;
+      background-color: #5243C2;
+      border-radius: 30px;
+      transition: 0.2s linear;
+   }
+
+   &__sub:hover{
+      background-color: #37299e;
+   }
 
 }
