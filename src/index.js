@@ -83,17 +83,17 @@ window.addEventListener("DOMContentLoaded", () => {
       });
    }
 
-   
+
    firstPageBtn.addEventListener("click", () => {
-     if (document.querySelectorAll(".main__ingradient")[7].classList.contains("showed")) {
-      swipeToFirstPage();
-      document.querySelectorAll(".main__ingradient").forEach(e => {
-         e.classList.remove("showed");
-      });
-     }
+      if (document.querySelectorAll(".main__ingradient")[7].classList.contains("showed")) {
+         swipeToFirstPage();
+         document.querySelectorAll(".main__ingradient").forEach(e => {
+            e.classList.remove("showed");
+         });
+      }
    });
 
-   function doSwitch(btn1, btn2){
+   function doSwitch(btn1, btn2) {
       let arr = [];
       arr.push(btn1, btn2);
       arr.forEach(e => {
@@ -309,21 +309,21 @@ window.addEventListener("DOMContentLoaded", () => {
          arr.push(btn1, btn2);
          arr.forEach(e => {
             e.addEventListener("click", () => {
-              if (document.querySelector(`.${this.cssClass}`).classList.contains("opened")) {
-               let burgerFolding = this.burgerDoFolding();
+               if (document.querySelector(`.${this.cssClass}`).classList.contains("opened")) {
+                  let burgerFolding = this.burgerDoFolding();
 
-               Promise.all(
-                  document.querySelector(`.${this.cssClass}`).getAnimations().map(
-                     function (burgerFolding) {
-                        return burgerFolding.finished;
-                     }
-                  )
-               ).then(() => {
-                  this.burgerPosition(document.querySelector(`.${this.cssClass}`), this.topA, this.leftA,
-                     this.widthA, this.height, this.zIndexA, this.rotateA, this.scale);
+                  Promise.all(
+                     document.querySelector(`.${this.cssClass}`).getAnimations().map(
+                        function (burgerFolding) {
+                           return burgerFolding.finished;
+                        }
+                     )
+                  ).then(() => {
+                     this.burgerPosition(document.querySelector(`.${this.cssClass}`), this.topA, this.leftA,
+                        this.widthA, this.height, this.zIndexA, this.rotateA, this.scale);
 
-               });
-              }
+                  });
+               }
             });
          });
 
@@ -1434,6 +1434,48 @@ window.addEventListener("DOMContentLoaded", () => {
       -20,
       generalObj.margin.bunMar
    );
+
+
+   // modal
+
+   let modalButton = document.querySelector(".main__btn-checkout");
+   let modalSelector = document.querySelector(".modal");
+   
+   
+   function closeModal(modalSelector, background) {
+      modalSelector.style.display = "none";
+      background.style.filter = "blur(0px)";
+   }
+
+   function openModal(modalSelector, background) {
+      modalSelector.style.display = "block";
+      background.style.filter = "blur(3px)";
+   }
+
+   function modal(modalSelector, modaltrigger, background) {
+
+      let modalStyle = getComputedStyle(modalSelector);
+      
+      modalButton.addEventListener("click", () => {
+         openModal(modalSelector, background);
+      });
+
+      modalSelector.addEventListener("click", (e) => {
+         if (e.target === modalSelector || e.target.getAttribute("data-close") == "") {
+            closeModal(modalSelector, background);
+            
+         }
+      });
+   
+      document.addEventListener("keydown", (e) => {
+         if (e.code === "Escape" && modalStyle.display == "block") {
+            closeModal(modalSelector, background);
+         }
+      });
+   }
+
+   modal(modalSelector, modalButton, wrapper);
+
 
 
 

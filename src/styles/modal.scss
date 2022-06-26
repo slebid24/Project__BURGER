@@ -3,7 +3,7 @@
    top: 0;
    left: 0;
    z-index: 1050;
-   display: block;
+   display: none;
    width: 100%;
    height: 100%;
    overflow: hidden;
@@ -46,7 +46,7 @@
       color: #1F2939;
       font-size: 20px;
       line-height: 27px;
-      padding-left: 22px;
+      padding-left: 26px;
       
 
       &::before{
@@ -227,13 +227,13 @@
       line-height: 16px;
       position: absolute;
       top: 7px;
-      left: 44px;
+      left: 14px;
    }
 
    &__time-input{
       position: absolute;
       top: 25px;
-      left: 44px;
+      left: 14px;
       border:none;
       background:none;
       outline:none;
@@ -254,7 +254,9 @@
       margin-right: 16px;
       @include reset-button;
       font-family: OpenSans-SemiBold;
+      font-size: 16px;  
       background-color: #F5F5FF;
+      color: #5243C2;      ;
       border-radius: 30px;
       transition: 0.2s linear;
       
@@ -269,6 +271,7 @@
       height: 52px;
       @include reset-button;
       font-family: OpenSans-SemiBold;
+      font-size: 16px;
       color: #F5F5FF;
       background-color: #5243C2;
       border-radius: 30px;

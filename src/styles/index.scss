@@ -4,7 +4,7 @@
 @import "main.scss";
 @import "footer.scss";
 @import "burger.scss";
-@import "constrBgImg.scss";
+@import "constructor.scss";
 @import "modal.scss";
 
 *,
@@ -31,7 +31,8 @@ img {
    display: flex;
    flex-direction: column;
    justify-content: space-between;
-   // filter: blur(3px);
+   transition: 0.3s;
+   
 }
 
 
