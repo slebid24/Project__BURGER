@@ -17,10 +17,10 @@ window.addEventListener("DOMContentLoaded", () => {
    const pages = document.querySelectorAll(".forslide");
    const page1 = document.querySelector(".main__inner-pg1");
    const page2 = document.querySelector(".main__inner-pg2");
-   const mainBtn = document.querySelector(".main__btn");
+   const bigBtn = document.querySelector(".main__btn");
 
-   pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, page2, mainBtn);
-   firstPageAnimat(mainBtn, firstPageBtn, secondPageBtn);
+   pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, page2, bigBtn);
+   firstPageAnimat(bigBtn, firstPageBtn, secondPageBtn);
    ui();
    burgerConstructor();
    modal();

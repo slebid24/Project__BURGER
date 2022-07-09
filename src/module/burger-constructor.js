@@ -1,11 +1,4 @@
-import bun from "../images/Type=bun_middle.svg";
-import cheese from "../images/Type=cheese.svg";
-import cucumber from "../images/Type=cucumber.png";
-import cutlet from '../images/Type=cutlet.svg';
-import mayo from "../images/Type=mayo.svg";
-import onion from "../images/Type=onion.png";
-import salad from "../images/Type=salad.svg";
-import tomato from "../images/Type=tomato.png";
+
 
 
 function burgerConstructor() {
@@ -59,8 +52,6 @@ function burgerConstructor() {
          this.render();
          this.counter();
          this.default();
-
-
       }
 
       render() {
@@ -88,7 +79,6 @@ function burgerConstructor() {
          document.querySelector(".main__time").innerHTML = "0.0 min";
          document.querySelector(".main__capacity").innerHTML = "0 oz";
          document.querySelector(".main__kcal").innerHTML = "0 kcal";
-
       }
 
       counter() {
@@ -185,10 +175,7 @@ function burgerConstructor() {
 
                }
             }, 100);
-
-
          });
-
 
 
          document.querySelector(`#${this.btnIdM}`).addEventListener("click", () => {

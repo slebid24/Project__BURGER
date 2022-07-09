@@ -1,5 +1,5 @@
 
-function pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, page2, mainBtn) {
+function pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, page2, bigBtn) {
    const width = (wrapper.offsetWidth - 20);
    const widthAfterSwipe = page1.offsetWidth;
    let offset = 0;
@@ -7,7 +7,6 @@ function pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, 
    page2.style.width = width + "px";
    field.style.display = "flex";
    field.style.transition = "0.8s all";
-   console.log(pages)
    pages.forEach(slide => {
       slide.style.width = width;
    });
@@ -57,18 +56,19 @@ function pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, 
          e.style.opacity = 0;
       });
    }  
-   
 
-   firstPageBtn.addEventListener("click", () => {
-      if (document.querySelectorAll(".main__ingradient")[7].classList.contains("showed")) {
-         swipeToFirstPage();
-         document.querySelectorAll(".main__ingradient").forEach(e => {
-            e.classList.remove("showed");
-         });
-      }
-   });
+   function handlerInstalligkTo1(btn) {
+      btn.addEventListener("click", () => {
+         if (document.querySelectorAll(".main__ingradient")[7].classList.contains("showed")) {
+            swipeToFirstPage();
+            document.querySelectorAll(".main__ingradient").forEach(e => {
+               e.classList.remove("showed");
+            });
+         }
+      });
+   }
 
-   function doSwitch(btn1, btn2) {
+   function handlerInstalligkTo2(btn1, btn2) {
       let arr = [];
       arr.push(btn1, btn2);
       arr.forEach(e => {
@@ -79,9 +79,9 @@ function pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, 
          });
       });
    }
-
-   doSwitch(mainBtn, secondPageBtn);
-   console.log(mainBtn)
+   
+   handlerInstalligkTo1(firstPageBtn);
+   handlerInstalligkTo2(bigBtn, secondPageBtn);
 }
 
 export default pageChanger;
