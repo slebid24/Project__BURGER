@@ -14,7 +14,6 @@ function pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, 
    page2.style.display = "none";
    firstPageBtn.classList.add("header__page-changer--active");
 
-
    function swipeToSecondPage() {
       if (offset == 0) {
          offset += width;
