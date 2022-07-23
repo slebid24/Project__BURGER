@@ -1,9 +1,9 @@
-import modal from "./module/modal";
-import ui from "./module/ui";
-import burgerConstructor from "./module/burger-constructor";
-import pageChanger from "./module/page-changer";
-import firstPageAnimat from "./module/first-page-animat";
-import ingradientMenu from "./module/ingradient-menu"
+import modal from "./modules/modal";
+import ui from "./modules/ui";
+import burgerConstructor from "./modules/burger-constructor";
+import pageChanger from "./modules/page-changer";
+import firstPageAnimat from "./modules/first-page-animat";
+import ingradientMenu from "./modules/ingradient-menu"
 
 import "./styles/index.scss";
 
