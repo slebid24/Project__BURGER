@@ -1,4 +1,4 @@
-import animationData from "./animation-data";
+import animationData from "./data/animation-data";
 
 function firstPageAnimat(mainBtn, firstPageBtn, secondPageBtn) {
    class burgerItem {
@@ -221,7 +221,6 @@ function firstPageAnimat(mainBtn, firstPageBtn, secondPageBtn) {
       }
 
       switchTo1Page() {
-
          firstPageBtn.addEventListener("click", () => {
             if (document.querySelector(`.${this.cssClass}`).classList.contains("closed")) {
                let burgerOpening = this.burgerDoOpening();

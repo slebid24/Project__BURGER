@@ -4,6 +4,7 @@ import burgerConstructor from "./modules/burger-constructor";
 import pageChanger from "./modules/page-changer";
 import firstPageAnimat from "./modules/first-page-animat";
 import ingradientMenu from "./modules/ingradient-menu"
+import ingradientMenuData from "./modules/data/ingradiets-menu-data";
 
 import "./styles/index.scss";
 
@@ -53,7 +54,7 @@ window.addEventListener("DOMContentLoaded", () => {
    pageChanger(firstPageBtn, secondPageBtn, wrapper, field, pages, page1, page2, bigBtn);
    firstPageAnimat(bigBtn, firstPageBtn, secondPageBtn);
    ui();
-   ingradientMenu();
+   ingradientMenu(ingradientMenuData);
    burgerConstructor(dataForVisualization, orderData);
    modal();
 });
