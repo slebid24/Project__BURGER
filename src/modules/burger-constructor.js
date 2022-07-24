@@ -1,5 +1,6 @@
+import ItemCalculationData from "./data/calculation-item-data";
 
-function burgerConstructor(dataForVisualization, orderData) {
+function burgerConstructor(dataForVisualization, orderData, arr) {
    class ItemCalculation {
       constructor(btnIdM, btnIdP, countId, title, conImg, price, time, oz, kcal,
                   dataForVisualization, orderData, imgKey, startMargin, pathMargin) {
@@ -19,6 +20,7 @@ function burgerConstructor(dataForVisualization, orderData) {
          this.pathMargin = pathMargin;
          this.counter();
          this.setDefault();
+         
       }
 
       setDefault () {
@@ -97,7 +99,7 @@ function burgerConstructor(dataForVisualization, orderData) {
                   }
                   document.querySelector(".item__topbun").style.top = `${parseInt(marginFin) - 90}%`;
 
-
+                  
                   this.orderData.sum.push(this.price);
                   let num = this.orderData.sum;
                   let sumprice = num.reduce((sum, current) => sum + current);
@@ -227,144 +229,10 @@ function burgerConstructor(dataForVisualization, orderData) {
       }
    }
 
-   new ItemCalculation(
-      "cutletMinus",
-      "cutletPlus",
-      "cutletCount",
-      "Cutlet",
-      "item__cutlet",
-      3,
-      4,
-      7,
-      600,
-      dataForVisualization,
-      orderData,
-      dataForVisualization.itemImg.cutletKey,
-      -50,
-      dataForVisualization.margin.cutletMar
-   );
-
-
-   new ItemCalculation(
-      "mayoMinus",
-      "mayoPlus",
-      "mayoCount",
-      "Mayo",
-      "item__mayo",
-      1,
-      0.5,
-      2,
-      150,
-      dataForVisualization,
-      orderData,
-      dataForVisualization.itemImg.mayoKey,
-      -10,
-      dataForVisualization.margin.mayoMar
-   );
-
-
-
-   new ItemCalculation(
-      "onionMinus",
-      "onionPlus",
-      "onionCount",
-      "Onion",
-      "item__onion",
-      0.5,
-      0.5,
-      1,
-      40,
-      dataForVisualization,
-      orderData,
-      dataForVisualization.itemImg.onionKey,
-      -10,
-      dataForVisualization.margin.onionMar
-   );
-
-   new ItemCalculation(
-      "tomatoMinus",
-      "tomatoPlus",
-      "tomatoCount",
-      "Tomato",
-      "item__tomato",
-      1,
-      0.5,
-      1,
-      60,
-      dataForVisualization,
-      orderData,
-      dataForVisualization.itemImg.tomatoKey,
-      -10,
-      dataForVisualization.margin.tomatoMar
-   );
-
-   new ItemCalculation(
-      "cucumberMinus",
-      "cucumberPlus",
-      "cucumberCount",
-      "Cucumber",
-      "item__cucumber",
-      0.5,
-      0.5,
-      1,
-      40,
-      dataForVisualization,
-      orderData,
-      dataForVisualization.itemImg.cucumberKey,
-      -10,
-      dataForVisualization.margin.cucumberMar
-   );
-
-   new ItemCalculation(
-      "cheeseMinus",
-      "cheesePlus",
-      "cheeseCount",
-      "Cheese",
-      "item__cheese",
-      2,
-      0.5,
-      2,
-      150,
-      dataForVisualization,
-      orderData,
-      dataForVisualization.itemImg.cheeseKey,
-      -3,
-      dataForVisualization.margin.cheeseMar
-   );
-
-   new ItemCalculation(
-      "saladMinus",
-      "saladPlus",
-      "saladCount",
-      "Salad",
-      "item__salad",
-      0.5,
-      0.5,
-      1,
-      40,
-      dataForVisualization,
-      orderData,
-      dataForVisualization.itemImg.saladKey,
-      -20,
-      dataForVisualization.margin.saladMar,
-   );
-
-   new ItemCalculation(
-      "bunMinus",
-      "bunPlus",
-      "bunCount",
-      "Bun",
-      "item__midbun",
-      0.5,
-      0.5,
-      1,
-      90,
-      dataForVisualization,
-      orderData,
-      dataForVisualization.itemImg.bunKey,
-      -20,
-      dataForVisualization.margin.bunMar,
-   );   
+   arr(dataForVisualization, orderData).forEach(item => {
+      const keys = Object.keys(item)
+      new ItemCalculation(...keys.map(key => item[key]))
+   })
 }
 
 export default burgerConstructor;

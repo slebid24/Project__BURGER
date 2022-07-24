@@ -32,13 +32,11 @@ function ingradientMenu(data) {
       }
    }
 
-   
-
    data().forEach(item => {
       const keys = Object.keys(item)
       new Ingradiet(...keys.map(key => item[key]))
    })
-   console.log(ingradientMenuData())
+   
 }
 
 export default ingradientMenu;

@@ -5,6 +5,7 @@ import pageChanger from "./modules/page-changer";
 import firstPageAnimat from "./modules/first-page-animat";
 import ingradientMenu from "./modules/ingradient-menu"
 import ingradientMenuData from "./modules/data/ingradiets-menu-data";
+import itemCalculationData from "./modules/data/calculation-item-data";
 
 import "./styles/index.scss";
 
@@ -39,6 +40,8 @@ const orderData = {
    kcal: [0],
 }
 
+
+
 window.addEventListener("DOMContentLoaded", () => {
    document.body.style.overflow = "hidden";
 
@@ -55,6 +58,6 @@ window.addEventListener("DOMContentLoaded", () => {
    firstPageAnimat(bigBtn, firstPageBtn, secondPageBtn);
    ui();
    ingradientMenu(ingradientMenuData);
-   burgerConstructor(dataForVisualization, orderData);
+   burgerConstructor(dataForVisualization, orderData, itemCalculationData);
    modal();
 });
